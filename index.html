@@ -8,6 +8,7 @@
     <style>
         :root {
             --slogan-top-offset: 5%; /* Adjust the top offset of the slogan */
+            --mission-box-opacity: 0.1; /* Adjust the opacity of the mission statement box */
         }
 
         body {
@@ -81,9 +82,18 @@
             text-shadow: -2px -2px 2px #222;
             text-align: center; /* Center the slogan */
             max-width: 80%; /* Limit the width of the slogan */
-            margin: var(--slogan-top-offset) auto 100px auto; /* Center the slogan vertically and add some margin below it */
+            margin: var(--slogan-top-offset) auto 30px auto; /* Center the slogan vertically and add some margin below it */
             position: relative; /* Add position relative to allow z-index to work */
             z-index: 2; /* Set z-index to bring the slogan above other elements */
+        }
+
+        .mission-statement-box {
+            background-color: rgba(0, 0, 0, var(--mission-box-opacity)); /* Set the background color with the specified opacity */
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 80%;
+            margin: 20px auto;
         }
 
         /* Media query for mobile devices */
@@ -127,6 +137,10 @@
         <div class="slogan">
             Elegance Unveiled, Empowering Every Curve: Felora Design <p></p>
             ظرافت رونمایی شد، توانمندسازیه هر منحنی: طراحی فلورا
+        </div>
+        <div class="mission-statement-box">
+            Couture Symphony: Felora Design, where threads intertwine to compose a harmonious masterpiece, embracing and empowering every woman's essence. From graceful slender frames to enigmatic curves, our bespoke creations are a symphony of elegance, adorning each lady with unparalleled allure and grace. <p></p>
+            سمفونی کوتور: طراحی فلورا، که در آن رشته‌ها در هم تنیده می‌شوند تا یک شاهکار هماهنگ را بسازند، و جوهر هر زن را در بر می‌گیرد و قدرت می‌بخشد.  از فریم‌های ملیح و ظریف گرفته تا منحنی‌های معمایی، آثار سفارشی ما سمفونی زیبایی هستند و هر خانمی را با جذابیت و ظرافت بی‌نظیر زینت می‌دهند.
         </div>
     </div>
 </body>
