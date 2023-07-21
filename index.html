@@ -19,7 +19,10 @@
             background-color: #333;
             padding: 10px;
             text-align: center;
-            z-index: 1000; /* Add a higher z-index to keep the navigation bar on top */
+            z-index: 1000;
+            display: flex;
+            justify-content: center; /* Center the navigation buttons */
+            align-items: center; /* Center items vertically */
         }
         .navigation a {
             color: white;
@@ -27,11 +30,22 @@
             margin: 0 15px;
             font-size: 18px;
         }
+        .logo-photo-container {
+            position: fixed;
+            top: 2px; /* Adjust the vertical position of the photo */
+            right: 20px; /* Adjust the horizontal position of the photo */
+            width: 40px; /* Adjust the width and height of the photo */
+            height: 40px;
+            background-image: url('images/Felora Design (Just the Emblem No Background).png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%; /* Makes the photo circular */
+        }
         .home {
             position: relative;
             width: 100%;
             height: 100vh;
-            background-image: url('images/Felora\ Design\ \(Logo\ in\ on\ Fabric\ Pink\ BG\ with\ Flower\).png'); /* Update the image file path here */
+            background-image: url('images/Felora Design (Logo in on Fabric Pink BG with Flower).png');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -44,6 +58,8 @@
         .slogan {
             font-size: 36px;
             font-weight: 500;
+            /* Dark outline */
+            text-shadow: -2px -2px 2px #222;
         }
     </style>
 </head>
@@ -53,10 +69,11 @@
         <a href="#collection">Collection</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <div class="logo-photo-container"></div>
     </div>
     <div class="home" id="home">
         <div class="slogan">
-            Elegance Unveiled, Empowering Every Curve: Felora Design 
+            Elegance Unveiled, Empowering Every Curve: Felora Design
         </div>
     </div>
 </body>
