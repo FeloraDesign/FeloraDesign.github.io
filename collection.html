@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felora Design | Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rubik', sans-serif;
+            background-image: url('images/Felora Design (Logo in on Fabric Pink BG with Flower).png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Keep the background fixed on scroll */
+        }
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+            display: flex;
+            justify-content: center; /* Center the navigation buttons */
+            align-items: center; /* Center items vertically */
+        }
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .logo-photo-container {
+            position: fixed;
+            top: 2px; /* Adjust the vertical position of the photo */
+            right: 20px; /* Adjust the horizontal position of the photo */
+            width: 40px; /* Adjust the width and height of the photo */
+            height: 40px;
+            background-image: url('images/Felora Design (Just the Emblem No Background).png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%; /* Makes the photo circular */
+        }
+        .collection-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+        .collection-item {
+            margin: 20px;
+            max-width: 300px;
+            text-align: center;
+            background-color: #fff; /* Add a white background color */
+            border-radius: 8px; /* Add rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+            transition: transform 0.2s ease; /* Add a smooth transition effect */
+        }
+        .collection-item:hover {
+            transform: translateY(-5px); /* Add a slight hover effect */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Make the photo pop on hover */
+        }
+        .collection-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px 8px 0 0; /* Rounded top corners */
+        }
+        .collection-item-title {
+            padding: 10px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="index.html">Home</a>
+        <a href="collection.html">Collection</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <div class="logo-photo-container"></div>
+    </div>
+
+    <div class="collection-grid">
+        <!-- Casual style clothing -->
+        <div class="collection-item">
+            <img src="images/IMG_1047.png" alt="Casual Style">
+            <div class="collection-item-title">Casual Style</div>
+        </div>
+
+        <!-- Formal style clothing -->
+        <div class="collection-item">
+            <img src="images/IMG_1047.png" alt="Formal Style">
+            <div class="collection-item-title">Formal Style</div>
+        </div>
+
+        <!-- Sportswear style clothing -->
+        <div class="collection-item">
+            <img src="images/IMG_1047.png" alt="Sportswear Style">
+            <div class="collection-item-title">Sportswear Style</div>
+        </div>
+
+        <!-- Eveningwear style clothing -->
+        <div class="collection-item">
+            <img src="images/IMG_1047.png" alt="Eveningwear Style">
+            <div class="collection-item-title">Eveningwear Style</div>
+        </div>
+    </div>
+
+</body>
+</html>
