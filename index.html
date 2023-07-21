@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --slogan-top-offset: 40%; /* Adjust the top offset of the slogan */
+            --slogan-top-offset: 20%; /* Adjust the top offset of the slogan */
         }
 
         body {
@@ -49,14 +49,30 @@
         .home {
             position: relative;
             width: 100%;
-            min-height: 100vh; /* Set minimum height to ensure content is visible */
+            min-height: calc(100vh - 70px); /* Set minimum height to ensure content is visible below the navigation bar */
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             color: white;
             padding-top: 70px;
-            margin-top: -70px; /* Adjust margin-top to prevent overlap with navigation bar */
+        }
+        .photo-container {
+            position: relative;
+            top: -50px; /* Adjust the vertical position of the photo container */
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1; /* Set z-index to position the photo below the slogan */
+            margin: 0 20px; /* Add some horizontal margin to the photo container */
+        }
+        .photo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 50px; /* Add rounded corners to the photo */
         }
         .slogan {
             font-size: 36px;
@@ -65,26 +81,9 @@
             text-shadow: -2px -2px 2px #222;
             text-align: center; /* Center the slogan */
             max-width: 80%; /* Limit the width of the slogan */
-            margin: var(--slogan-top-offset) auto 30px auto; /* Center the slogan vertically and add some margin below it */
+            margin: var(--slogan-top-offset) auto 350px auto; /* Center the slogan vertically and add some margin below it */
             position: relative; /* Add position relative to allow z-index to work */
             z-index: 2; /* Set z-index to bring the slogan above other elements */
-        }
-        .photo-container {
-            position: absolute;
-            top: calc(70px + 5px); /* Position the photo container below the navigation bar with a small gap */
-            right: 0;
-            bottom: 0;
-            left: 0;
-            display: relative;  /* This used to be set to "flex" but "relative" made it better on vertical displays */
-            justify-content: center;
-            align-items: center; 
-            z-index: 1; /* Set z-index to position the photo below the slogan */
-            margin: 0 20px; /* Add some horizontal margin to the photo container */
-        }
-        .photo-container img {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 8px; /* Add rounded corners to the photo */
         }
 
         /* Media query for mobile devices */
@@ -106,7 +105,7 @@
                 font-size: 28px; /* Adjust the font size for mobile devices */
             }
             .photo-container {
-                top: calc(50px + 5px); /* Adjust the position for mobile devices */
+                top: -30px; /* Adjust the position for mobile devices */
                 margin: 0; /* Remove horizontal margin for mobile devices */
             }
         }
@@ -122,11 +121,11 @@
     </div>
 
     <div class="home" id="home">
-        <div class="slogan">
-            Elegance Unveiled, Empowering Every Curve: Felora Design
-        </div>
         <div class="photo-container">
             <img src="images/Felora Design (Logo in on Fabric Pink BG with Flower).png" alt="Your Photo">
+        </div>
+        <div class="slogan">
+            Elegance Unveiled, Empowering Every Curve: Felora Design
         </div>
     </div>
 </body>
