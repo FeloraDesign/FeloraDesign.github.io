@@ -35,6 +35,14 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 18px;
+            transition: all 0.3s ease; /* Add a transition effect for smooth animation */
+        }
+        .navigation a:hover {
+            color: #c95666; /* Change the color on hovering */
+            transform: scale(1.1); /* Enlarge the button slightly on hovering */
+        }
+        .navigation a:active {
+            color: #474384; /* Change the color when the button is clicked (active) */
         }
         .logo-photo-container {
             position: fixed;
@@ -94,7 +102,6 @@
             text-align: center;
             max-width: 80%;
             margin: 20px auto;
-/*            text-shadow: -2px -2px 2px #222; */
         }
 
         /* Media query for mobile devices */
