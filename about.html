@@ -8,14 +8,14 @@
     <style>
         :root {
             --slogan-top-offset: 5%; /* Adjust the top offset of the slogan */
-            --mission-box-opacity: 0.5; /* Adjust the opacity of the mission statement box */
+            --mission-box-opacity: 0.3; /* Adjust the opacity of the mission statement box */
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: 'Rubik', sans-serif;
-            overflow: hidden;
+            overflow: hidden; /* Prevent scrolling of the video background */
         }
 
         .navigation {
@@ -70,8 +70,7 @@
             align-items: center;
             flex-direction: column;
             color: white;
-            padding-top: -1000px;
-            overflow-y: auto; /* Make the text box scrollable */
+            padding-top: 70px;
         }
 
         .about .mission-statement-box {
@@ -79,9 +78,11 @@
             padding: 20px;
             border-radius: 8px;
             text-align: center;
-            max-width: 80%;
+            width: 90%;
+            max-width: 800px;
+            height: 80vh; /* Set the height of the box to occupy 80% of the viewport height */
             margin: 20px auto;
-            max-height: 600vh; /* Set the maximum height of the text box to limit scrolling */
+            overflow-y: auto; /* Make the text box scrollable */
         }
 
         .video-background {
@@ -91,17 +92,12 @@
             width: 100%;
             height: 100%;
             z-index: -1; /* Set z-index to position the video below the text */
-            overflow: hidden; /* Hide any overflow from the video */
         }
 
         .video-background video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            pointer-events: none; /* Disable pointer events on the video, so it doesn't interfere with scrolling */
         }
 
         /* Media query for mobile devices */
@@ -123,11 +119,12 @@
             }
 
             .about {
-                padding-top: 150px; /* Adjust the padding for better visibility on mobile devices */
+                padding-top: 100px; /* Adjust the padding for better visibility on mobile devices */
             }
 
             .about .mission-statement-box {
-                max-width: 90%; /* Adjust the width of the box on mobile devices */
+                width: 90%; /* Adjust the width of the box on mobile devices */
+                max-width: 90%; /* Set the maximum width of the box on mobile devices */
             }
         }
     </style>
@@ -166,6 +163,8 @@ A testament to Mrs. Soleymanpour's artistic brilliance is the recent collaborati
 As Felora Design continues to dazzle the fashion world, we honor and celebrate the extraordinary accomplishments of Mrs. Felora Soleymanpour. Her artistic vision and tireless efforts continue to elevate our brand to new heights, leaving an indelible impression on the hearts of our cherished clientele.
 
 With an unwavering commitment to quality and creativity, Felora Design invites you to embark on a sartorial journey like no other. Join us as we continue to weave dreams into reality, empowering men and women with exquisite designs that capture the essence of beauty and allure. <p></p> <p></p>
+
+ درباره‌ طراحیه فلورا<br><br>
 
 طراحیه فلورا به عنوان یک شرکت مد بین المللی با افتخار ایستاده است که دفتر مرکزی آن در شهر پر جنب و جوش تهران، ایران مستقر است.  خدمات نفیس ما در سراسر قاره ها ارائه می شود و برای علاقه مندان به مد در سراسر جهان ارائه می شود.  با ارائه دهندگان خدمات اختصاصی در شهرهای برجسته مانند لس آنجلس، ایالات متحده آمریکا؛  لاس وگاس، ایالات متحده آمریکا؛  تورنتو، کانادا؛  مونیخ، آلمان؛  و دبی، امارات متحده عربی، ما به طور یکپارچه فرهنگ ها را از طریق هنر مد به هم متصل می کنیم.
 
