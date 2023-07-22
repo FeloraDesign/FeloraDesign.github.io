@@ -79,8 +79,29 @@
         }
         .collection-item-title {
             padding: 10px;
-            font-size: 20px;
+            font-size: 15px;
             font-weight: 500;
+        }
+
+        .home {
+            position: relative;
+            width: 100%;
+            min-height: calc(10vh - 70px); /* Set minimum height to ensure content is visible below the navigation bar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            padding-top: 70px;
+        }
+
+        .text {
+                font-size: 20px; /* Adjust the font size for mobile devices */
+                text-align: center;
+                position: flex;
+                left: 100;
+                background-color: #d16d7a;
+                padding: 10px;
         }
 
         /* Media query for mobile devices */
@@ -110,13 +131,31 @@
         <div class="logo-photo-container"></div>
     </div>
 
+    <div class="home" id="home">
+    
+    <div class="text">
+        <h2>COLLECTION</h2> <p></p>
+        Welcome to Felora Design's Collection page, where sophistication and empowerment converge in a curated selection of exclusive outfits. Each ensemble is a testament to the beauty of individuality, embracing every woman's distinct curves and style.
+
+To acquire your desired outfit, simply provide the unique product ID, and our team will ensure a seamless ordering process. Moreover, we wholeheartedly embrace personalization, inviting you to share your preferences, enabling us to tailor the outfit to your individual taste and desires.
+
+At Felora Design, we are committed to empowering women through fashion, and our dedicated customer support is here to assist you every step of the way. Join us in celebrating elegance, allure, and the spirit of femininity <p></p>
+به صفحه مجموعه‌های طراحی فلورا خوش آمدید، جایی که اصالت و توانمندسازی در انتخاب دقیق از لباس‌های اختصاصی به هم می‌آیند. هر مجموعه لباس شهادتی از زیبایی انحصاری هر فرد است و هر یک از این طرح‌ها به همه منحنی‌ها و سبک‌های خاص هر زن پوشش می‌دهد.
+
+برای تهیه لباس مورد علاقه‌تان، به سادگی شناسه محصول منحصر به فرد را ارائه دهید و تیم ما فرآیند سفارش‌دهی را بدون درنگ برای شما انجام می‌دهد. علاوه بر این، ما به طراحی شخصی با احترام پایبند هستیم و شما را به اشتراک گذاشتن ترجیحات خود دعوت می‌کنیم تا ما بتوانیم لباس را به سلیقه و اراده شما سفارشی کنیم.
+
+در طراحی فلورا، ما به توانمندسازی زنان از طریق مد متعهد هستیم و پشتیبانی مشتاق مشتریان ما در همه مراحل در دسترس شما قرار دارد. با ما همراه شوید و به جشن زیبایی، جذابیت و روح زنانگی بپیوندید    </div>
+
+    </div>
+
+
     <div class="collection-grid">
-        <!-- Casual style clothing -->
+        <!-- Whimsical Waves/موج‌های شگفت‌انگیز-->
         <div class="collection-item">
             <a href="images/IMG_1710.png" target="_blank"> <!-- Add anchor tag around the image -->
                 <img src="images/IMG_1710.png" alt="Casual Style">
             </a>
-<!--1           <div class="collection-item-title">Casual Style</div> --> 
+           <div class="collection-item-title">Whimsical Waves/موج‌های شگفت‌انگیز</div>
         </div>
 
         <!-- Sportswear style clothing -->
@@ -124,7 +163,7 @@
             <a href="images/IMG_1708.png" target="_blank"> <!-- Add anchor tag around the image -->
                 <img src="images/IMG_1708.png" alt="Sportswear Style">
             </a>
-<!--2           <div class="collection-item-title">Casual Style</div> -->
+            <div class="collection-item-title">Whimsical Waves/موج‌های شگفت‌انگیز</div>
         </div>
 
         <!-- Formal style clothing -->
@@ -132,7 +171,7 @@
             <a href="images/IMG_2056.png" target="_blank"> <!-- Add anchor tag around the image -->
                 <img src="images/IMG_2056.png" alt="Formal Style">
             </a>
-<!--3           <div class="collection-item-title">Casual Style</div> -->
+            <div class="collection-item-title">Whimsical Waves/موج‌های شگفت‌انگیز</div>
         </div>
 
 
@@ -141,7 +180,7 @@
             <a href="images/IMG_1175.png" target="_blank"> <!-- Add anchor tag around the image -->
                 <img src="images/IMG_1175.png" alt="Eveningwear Style">
             </a>
-<!--4           <div class="collection-item-title">Casual Style</div> -->
+           <div class="collection-item-title">Floral Fusion/ترکیب گلها</div>
         </div>
 
         <!-- Casual style clothing -->
@@ -149,7 +188,7 @@
             <a href="images/IMG_1047.png" target="_blank"> <!-- Add anchor tag around the image -->
                 <img src="images/IMG_1047.png" alt="Casual Style">
             </a>
-<!--5           <div class="collection-item-title">Casual Style</div> --> 
+           <div class="collection-item-title">Mystic Moonlight/مهتاب عرفانی</div> 
         </div>
 
         <!-- Sportswear style clothing -->
@@ -157,7 +196,7 @@
             <a href="images/IMG_1058.png" target="_blank"> <!-- Add anchor tag around the image -->
                 <img src="images/IMG_1058.png" alt="Sportswear Style">
             </a>
-<!--6           <div class="collection-item-title">Casual Style</div> -->
+            <div class="collection-item-title">Mystic Moonlight/مهتاب عرفانی</div> 
         </div>
 
         <!-- Formal style clothing -->
@@ -165,7 +204,15 @@
             <a href="images/IMG_0961.png" target="_blank"> <!-- Add anchor tag around the image -->
                 <img src="images/IMG_0961.png" alt="Formal Style">
             </a>
-<!--7           <div class="collection-item-title">Casual Style</div> -->
+            <div class="collection-item-title">Mystic Moonlight/مهتاب عرفانی</div> 
+        </div>
+
+        <!-- Eveningwear style clothing -->
+        <div class="collection-item">
+            <a href="images/IMG_1588.png" target="_blank"> <!-- Add anchor tag around the image -->
+                <img src="images/IMG_1588.png" alt="Eveningwear Style">
+            </a>
+           <div class="collection-item-title">Spanish Elegancia/ظرافت اسپانیایی</div>
         </div>
 
 
@@ -174,7 +221,16 @@
             <a href="images/IMG_1577.png" target="_blank"> <!-- Add anchor tag around the image -->
                 <img src="images/IMG_1577.png" alt="Eveningwear Style">
             </a>
-<!--8           <div class="collection-item-title">Casual Style</div> -->
+           <div class="collection-item-title">Gilded Plumage/پرهای طلاکاری شده</div>
+        </div>
+
+
+        <!-- Eveningwear style clothing -->
+        <div class="collection-item">
+            <a href="images/IMG_1886.png" target="_blank"> <!-- Add anchor tag around the image -->
+                <img src="images/IMG_1886.png" alt="Eveningwear Style">
+            </a>
+            <div class="collection-item-title">Gilded Plumage/پرهای طلاکاری شده</div>
         </div>
 
         <!-- Eveningwear style clothing -->
@@ -183,22 +239,6 @@
                 <img src="images/IMG_1691.png" alt="Eveningwear Style">
             </a>
 <!--9           <div class="collection-item-title">Casual Style</div> -->
-        </div>
-
-        <!-- Eveningwear style clothing -->
-        <div class="collection-item">
-            <a href="images/IMG_1588.png" target="_blank"> <!-- Add anchor tag around the image -->
-                <img src="images/IMG_1588.png" alt="Eveningwear Style">
-            </a>
-<!--10           <div class="collection-item-title">Casual Style</div> -->
-        </div>
-
-        <!-- Eveningwear style clothing -->
-        <div class="collection-item">
-            <a href="images/IMG_1886.png" target="_blank"> <!-- Add anchor tag around the image -->
-                <img src="images/IMG_1886.png" alt="Eveningwear Style">
-            </a>
-<!--11           <div class="collection-item-title">Casual Style</div> -->
         </div>
 
         <!-- Eveningwear style clothing -->
