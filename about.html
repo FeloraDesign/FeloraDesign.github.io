@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felora Design | About</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --slogan-top-offset: 5%; /* Adjust the top offset of the slogan */
+            --mission-box-opacity: 0.5; /* Adjust the opacity of the mission statement box */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rubik', sans-serif;
+            overflow: hidden;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+            display: flex;
+            justify-content: center; /* Center the navigation buttons */
+            align-items: center; /* Center items vertically */
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: all 0.3s ease; /* Add a transition effect for smooth animation */
+        }
+
+        .navigation a:hover {
+            color: #c95666; /* Change the color on hovering */
+            transform: scale(1.1); /* Enlarge the button slightly on hovering */
+        }
+
+        .navigation a:active {
+            color: #474384; /* Change the color when the button is clicked (active) */
+        }
+
+        .logo-photo-container {
+            position: fixed;
+            top: 2px; /* Adjust the vertical position of the photo */
+            right: 20px; /* Adjust the horizontal position of the photo */
+            width: 40px; /* Adjust the width and height of the photo */
+            height: 40px;
+            background-image: url('images/Felora Design (Just the Emblem No Background).png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%; /* Makes the photo circular */
+        }
+
+        .about {
+            position: relative;
+            width: 100%;
+            min-height: 100vh; /* Set minimum height to cover the entire viewport */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            padding-top: -1000px;
+            overflow-y: auto; /* Make the text box scrollable */
+        }
+
+        .about .mission-statement-box {
+            background-color: rgba(0, 0, 0, var(--mission-box-opacity)); /* Set the background color with the specified opacity */
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 80%;
+            margin: 20px auto;
+            max-height: 600vh; /* Set the maximum height of the text box to limit scrolling */
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Set z-index to position the video below the text */
+            overflow: hidden; /* Hide any overflow from the video */
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* Disable pointer events on the video, so it doesn't interfere with scrolling */
+        }
+
+        /* Media query for mobile devices */
+        @media (max-width: 600px) {
+            .navigation {
+                flex-direction: row; /* Align navigation buttons horizontally */
+                justify-content: flex-start; /* Push buttons to the left */
+            }
+
+            .navigation a {
+                margin: 5px 10px; /* Add some spacing between the buttons */
+            }
+
+            .logo-photo-container {
+                top: 10px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .about {
+                padding-top: 150px; /* Adjust the padding for better visibility on mobile devices */
+            }
+
+            .about .mission-statement-box {
+                max-width: 90%; /* Adjust the width of the box on mobile devices */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="index.html">Home</a>
+        <a href="collection.html">Collection</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <div class="logo-photo-container"></div>
+    </div>
+
+    <div class="video-background">
+        <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+            <source src="images/Website Looping Logomov.mp4" type="video/mp4">
+            <!-- Add fallback content for browsers that do not support video -->
+        </video>
+    </div>
+
+    <div class="about" id="about">
+        <div class="mission-statement-box">
+            <h3>
+                About Felora Design<br><br>
+
+Felora Design stands proudly as an illustrious international fashion company with its headquarters based in the vibrant city of Tehran, Iran. Our exquisite services span across continents, catering to fashion enthusiasts worldwide. With dedicated service providers in prominent cities such as Los Angeles, USA; Las Vegas, USA; Toronto, Canada; Munich, Germany; and Dubai, United Arab Emirates, we seamlessly connect cultures through the art of fashion.
+
+At the heart of our extraordinary journey is the visionary and creative force behind Felora Design, none other than the esteemed Mrs. Felora Soleymanpour. With an unwavering passion for fashion and an exceptional talent in design, Mrs. Soleymanpour has been instrumental in shaping the brand's identity and global presence.
+
+With an illustrious career spanning over four decades, Mrs. Soleymanpour's remarkable contributions to the fashion industry have left an indelible mark. From envisioning timeless collections to perfecting intricate designs, she has truly redefined elegance and sophistication in the world of haute couture.
+
+Felora Design proudly carries the legacy of Mrs. Soleymanpour's unparalleled dedication to craftsmanship and attention to detail. Her unique designs have adorned numerous satisfied clients, who have come to rely on her creations for a multitude of special occasions. From intimate wedding nights to glamorous galas, Felora Design has become synonymous with sophistication and opulence.
+
+A testament to Mrs. Soleymanpour's artistic brilliance is the recent collaboration with the spectacular film "The Ritual" (in Persian: "مراسم ویژه"), which eloquently depicts the inspiring journey of Mr. Nelson Mandela in South Africa. This cinematic marvel features the radiant Mrs. Mahtab Keramati, a beacon of Persian talent, and is skillfully directed by the brilliant Mr. Meysam Shahbabaee.
+
+As Felora Design continues to dazzle the fashion world, we honor and celebrate the extraordinary accomplishments of Mrs. Felora Soleymanpour. Her artistic vision and tireless efforts continue to elevate our brand to new heights, leaving an indelible impression on the hearts of our cherished clientele.
+
+With an unwavering commitment to quality and creativity, Felora Design invites you to embark on a sartorial journey like no other. Join us as we continue to weave dreams into reality, empowering men and women with exquisite designs that capture the essence of beauty and allure. <p></p> <p></p>
+
+طراحیه فلورا به عنوان یک شرکت مد بین المللی با افتخار ایستاده است که دفتر مرکزی آن در شهر پر جنب و جوش تهران، ایران مستقر است.  خدمات نفیس ما در سراسر قاره ها ارائه می شود و برای علاقه مندان به مد در سراسر جهان ارائه می شود.  با ارائه دهندگان خدمات اختصاصی در شهرهای برجسته مانند لس آنجلس، ایالات متحده آمریکا؛  لاس وگاس، ایالات متحده آمریکا؛  تورنتو، کانادا؛  مونیخ، آلمان؛  و دبی، امارات متحده عربی، ما به طور یکپارچه فرهنگ ها را از طریق هنر مد به هم متصل می کنیم.
+
+ در قلب این سفر فوق‌العاده ما، کسی نیست جز نیروی بینا و خلاق سرکار خانم فلورا سلیمانپور.  خانم سلیمانپور با اشتیاق تزلزل ناپذیر به مد و استعدادی استثنایی در طراحی، نقش مهمی در شکل دادن به هویت و حضور جهانی این برند داشته است.
+
+ با بیش از چهار دهه سابقه درخشان، کمک های چشمگیر خانم سلیمانپور در صنعت مد اثری پاک نشدنی بر جای گذاشته است.  او از تجسم مجموعه‌های جاودانه گرفته تا تکمیل طرح‌های پیچیده، واقعاً ظرافت و پیچیدگی را در دنیای مد لباس باز تعریف کرده است.
+
+ فلورا دیزاین با افتخار میراث فداکاری بی نظیر خانم سلیمانپور به صنعتگری و توجه به جزئیات را دارد.  طرح‌های منحصربه‌فرد او مشتریان راضی متعددی را زینت داده است که برای بسیاری از موقعیت‌های خاص به خلاقیت‌های او تکیه کرده‌اند.  از شب های عروسی صمیمی تا جشن های پر زرق و برق، طراحیه فلورا مترادف با اجلال است.
+
+ شاهدی بر درخشش هنری خانم سلیمانپور، همکاری اخیر وی با فیلم دیدنی «The Ritual» (به فارسی: «مراسم ویژه») است که سفر الهام‌بخش آقای نلسون ماندلا در آفریقای جنوبی را به شیوایی به تصویر می‌کشد.  این اعجاز سینمایی با حضور درخشنده خانم مهتاب کرامتی، فانوس استعداد ایرانی و با مهارت آقای میثم شاهبابایی کارگردانی شده است.
+
+ از آنجایی که طراحیه فلورا همچنان دنیای مد را خیره می کند، ما دستاوردهای خارق العاده خانم فلورا سلیمانپور را گرامی می داریم و آن را تجلیل می کنیم.  بینش هنری و تلاش‌های خستگی‌ناپذیر او همچنان برای ارتقای برند ما به ارتفاعات جدید ادامه می‌یابد و تأثیری محو نشدنی در قلب مشتریان گرامی ما بر جای می‌گذارد.
+
+ طراحیه فلورا با تعهدی تزلزل ناپذیر به کیفیت و خلاقیت، از شما دعوت می‌کند تا به سفری ستارگانی بروید که شبیه هیچ‌کس دیگری نیست.  به ما بپیوندید تا رویاها را به واقعیت تبدیل کنیم و مردان و زنان را با طرح‌های نفیس که ذات زیبایی و جذابیت را به تصویر می‌کشند، توانمند کنیم.
+
+                <!-- Add your text here -->
+            </h3>
+        </div>
+    </div>
+</body>
+</html>
