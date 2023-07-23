@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felora Design | Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Add the CSS styles for navigation, logo, and background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rubik', sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+            background-color: #000000; /* Set the background color */
+        }
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+            display: flex;
+            justify-content: center; /* Center the navigation buttons */
+            align-items: center; /* Center items vertically */
+        }
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: all 0.3s ease; /* Add a transition effect for smooth animation */
+        }
+        .navigation a:hover {
+            color: #c95666; /* Change the color on hovering */
+            transform: scale(1.1); /* Enlarge the button slightly on hovering */
+        }
+        .navigation a:active {
+            color: #474384; /* Change the color when the button is clicked (active) */
+        }
+        .logo-photo-container {
+            position: fixed;
+            top: 2px; /* Adjust the vertical position of the photo */
+            right: 20px; /* Adjust the horizontal position of the photo */
+            width: 40px; /* Adjust the width and height of the photo */
+            height: 40px;
+            background-image: url('images/Felora Design (Just the Emblem No Background).png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%; /* Makes the photo circular */
+        }
+
+        .contact {
+            width: 100%;
+            height: 30vh;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            padding-top: 50px;
+        }
+
+        .contact-text {
+            max-width: 80%;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 0px;
+        }
+
+        .email-photo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .email-photo {
+            width: 100px;
+            height: 100px;
+            background-image: url('images/Email.png'); /* Replace 'images/email-icon.png' with the path to your photo */
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Add a transition effect for smooth animation */
+        }
+
+        .email-photo:hover {
+            transform: scale(1.2); /* Enlarge the email photo on hovering */
+        }
+
+        /* Add the CSS for the video background */
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -10;
+        }
+
+        /* Media query for mobile devices */
+        @media (max-width: 600px) {
+            .navigation {
+                flex-direction: row; /* Align navigation buttons horizontally */
+                justify-content: flex-start; /* Push buttons to the left */
+            }
+            .navigation a {
+                margin: 5px 10px; /* Add some spacing between the buttons */
+            }
+            .logo-photo-container {
+                top: 10px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+            }
+            .contact-text {
+                font-size: 18px; /* Adjust the font size for mobile devices */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="index.html">Home</a>
+        <a href="collection.html">Collection</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <div class="logo-photo-container"></div>
+    </div>
+
+    <!-- Include the looping video background (replace 'video-file.mp4' with your video file) -->
+    <video autoplay loop muted id="video-background">
+        <source src="images/Website Looping Logomov.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="contact" id="contact">
+        <div class="contact-text">
+            For any inquiries or questions, please feel free to contact us:
+            <p>FeloraDesign@outlook.com</p>
+        </div>
+        <div class="email-photo-container">
+            <a href="mailto:FeloraDesign@outlook.com">
+                <div class="email-photo"></div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
