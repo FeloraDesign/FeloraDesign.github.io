@@ -131,59 +131,25 @@
         /* Media query for mobile devices */
         @media (max-width: 600px) {
             .navigation {
-                flex-direction: row;
-                /* Align navigation buttons horizontally */
-                justify-content: flex-start;
-                /* Push buttons to the left */
+                flex-direction: row; /* Align navigation buttons horizontally */
+                justify-content: flex-start; /* Push buttons to the left */
             }
-
             .navigation a {
-                margin: 5px 10px;
-                /* Add some spacing between the buttons */
+                margin: 5px 10px; /* Add some spacing between the buttons */
             }
-
             .logo-photo-container {
                 top: 10px;
                 right: 10px;
                 width: 30px;
                 height: 30px;
             }
-
-            .contact-text {
-                font-size: 18px;
-                /* Adjust the font size for mobile devices */
+            .slogan {
+                font-size: 28px; /* Adjust the font size for mobile devices */
             }
-        }
-
-        .navigation a img {
-            width: 100px; /* Adjust the size of the button */
-            height: 70px;
-            transition: transform 0.3s ease; /* Add a transition effect for smooth animation */
-        }
-    
-        /* Adjust the size of the button on hover */
-        .navigation a:hover img {
-            transform: scale(1.1);
-        }
-    
-        /* Set the image source for the Home button when hovering */
-        .navigation a:nth-child(1):hover img {
-            content: url('images/website_buttons/home_hover.png');
-        }
-    
-        /* Set the image source for the Collection button when hovering */
-        .navigation a:nth-child(2):hover img {
-            content: url('images/website_buttons/collection_hover.png');
-        }
-    
-        /* Set the image source for the About button when hovering */
-        .navigation a:nth-child(3):hover img {
-            content: url('images/website_buttons/about_hover.png');
-        }
-    
-        /* Set the image source for the Contact button when hovering */
-        .navigation a:nth-child(4):hover img {
-            content: url('images/website_buttons/contact_hover.png');
+            .photo-container {
+                top: -50px; /* Adjust the position for mobile devices */
+                margin: 0; /* Remove horizontal margin for mobile devices */
+            }
         }
     </style>
 </head>
