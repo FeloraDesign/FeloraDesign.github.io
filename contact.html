@@ -12,12 +12,9 @@
             margin: 0;
             padding: 0;
             font-family: 'Rubik', sans-serif;
-            overflow: hidden;
-            /* Prevent scrolling */
-            background-color: #cb5f6e;
-            /* Set the background color */
+            overflow: hidden; /* Prevent scrolling */
+            background-color: #cb5f6e; /* Set the background color */
         }
-
         .navigation {
             position: fixed;
             top: 0;
@@ -28,39 +25,29 @@
             text-align: center;
             z-index: 1000;
             display: flex;
-            justify-content: center;
-            /* Center the navigation buttons */
-            align-items: center;
-            /* Center items vertically */
+            justify-content: center; /* Center the navigation buttons */
+            align-items: center; /* Center items vertically */
         }
-
         .navigation a {
             color: white;
             text-decoration: none;
             margin: 0 15px;
             font-size: 18px;
-            transition: all 0.3s ease;
-            /* Add a transition effect for smooth animation */
+            transition: all 0.3s ease; /* Add a transition effect for smooth animation */
         }
-
         .navigation a:hover {
-            color: #cb5f6e;
-            /* Change the color on hovering */
-            transform: scale(1.1);
-            /* Enlarge the button slightly on hovering */
+            color: #cb5f6e; /* Change the color on hovering */
+            transform: scale(1.1); /* Enlarge the button slightly on hovering */
         }
-
         .navigation a:active {
-            color: #a13885;
-            /* Change the color when the button is clicked (active) */
+            color: #a13885; /* Change the color when the button is clicked (active) */
         }
-
         .logo-photo-container {
             position: fixed;
-            top: 15px; /* Adjust the vertical position of the photo */
+            top: 2px; /* Adjust the vertical position of the photo */
             right: 20px; /* Adjust the horizontal position of the photo */
-            width: 60px; /* Adjust the width and height of the photo */
-            height: 60px;
+            width: 40px; /* Adjust the width and height of the photo */
+            height: 40px;
             background-image: url('images/Felora Design (Just the Emblem No Background).png');
             background-size: cover;
             background-position: center;
@@ -203,22 +190,10 @@
 
 <body>
     <div class="navigation">
-        <a href="index.html">
-            <!-- Add the image for the Home button (neutral state) -->
-            <img src="images/website_buttons/home_normal.png" alt="Home">
-        </a>
-        <a href="collection.html">
-            <!-- Add the image for the Collection button (neutral state) -->
-            <img src="images/website_buttons/collection_normal.png" alt="Collection">
-        </a>
-        <a href="about.html">
-            <!-- Add the image for the About button (neutral state) -->
-            <img src="images/website_buttons/about_normal.png" alt="About">
-        </a>
-        <a href="contact.html">
-            <!-- Add the image for the Contact button (neutral state) -->
-            <img src="images/website_buttons/contact_normal.png" alt="Contact">
-        </a>
+        <a href="index.html">Home</a>
+        <a href="collection.html">Collection</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
         <div class="logo-photo-container"></div>
     </div>
 
