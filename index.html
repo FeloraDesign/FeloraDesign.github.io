@@ -45,10 +45,10 @@
         }
         .logo-photo-container {
             position: fixed;
-            top: 15px; /* Adjust the vertical position of the photo */
+            top: 2px; /* Adjust the vertical position of the photo */
             right: 20px; /* Adjust the horizontal position of the photo */
-            width: 60px; /* Adjust the width and height of the photo */
-            height: 60px;
+            width: 40px; /* Adjust the width and height of the photo */
+            height: 40px;
             background-image: url('images/Felora Design (Just the Emblem No Background).png');
             background-size: cover;
             background-position: center;
@@ -57,7 +57,7 @@
         .home {
             position: relative;
             width: 100%;
-            min-height: calc(90vh - 70px); /* Set minimum height to ensure content is visible below the navigation bar */
+            min-height: calc(100vh - 70px); /* Set minimum height to ensure content is visible below the navigation bar */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -75,7 +75,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1; /* Set z-index to position the photo below the slogan */
-            margin: 0 400px; /* Add some horizontal margin to the photo container */
+            margin: 0 20px; /* Add some horizontal margin to the photo container */
         }
         .photo-container img {
             max-width: 100%;
@@ -126,57 +126,14 @@
                 margin: 0; /* Remove horizontal margin for mobile devices */
             }
         }
-
-        .navigation a img {
-            width: 100px; /* Adjust the size of the button */
-            height: 70px;
-            transition: transform 0.3s ease; /* Add a transition effect for smooth animation */
-        }
-    
-        /* Adjust the size of the button on hover */
-        .navigation a:hover img {
-            transform: scale(1.1);
-        }
-    
-        /* Set the image source for the Home button when hovering */
-        .navigation a:nth-child(1):hover img {
-            content: url('images/website_buttons/home_hover.png');
-        }
-    
-        /* Set the image source for the Collection button when hovering */
-        .navigation a:nth-child(2):hover img {
-            content: url('images/website_buttons/collection_hover.png');
-        }
-    
-        /* Set the image source for the About button when hovering */
-        .navigation a:nth-child(3):hover img {
-            content: url('images/website_buttons/about_hover.png');
-        }
-    
-        /* Set the image source for the Contact button when hovering */
-        .navigation a:nth-child(4):hover img {
-            content: url('images/website_buttons/contact_hover.png');
-        }
     </style>
 </head>
 <body>
     <div class="navigation">
-        <a href="index.html">
-            <!-- Add the image for the Home button (neutral state) -->
-            <img src="images/website_buttons/home_normal.png" alt="Home">
-        </a>
-        <a href="collection.html">
-            <!-- Add the image for the Collection button (neutral state) -->
-            <img src="images/website_buttons/collection_normal.png" alt="Collection">
-        </a>
-        <a href="about.html">
-            <!-- Add the image for the About button (neutral state) -->
-            <img src="images/website_buttons/about_normal.png" alt="About">
-        </a>
-        <a href="contact.html">
-            <!-- Add the image for the Contact button (neutral state) -->
-            <img src="images/website_buttons/contact_normal.png" alt="Contact">
-        </a>
+        <a href="index.html">Home</a>
+        <a href="collection.html">Collection</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
         <div class="logo-photo-container"></div>
     </div>
 
