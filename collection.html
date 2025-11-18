@@ -6,1271 +6,1409 @@
     <title>Felora Design | Collection</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --brand-color: #8b8b8b;
+            --transition: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
             font-family: 'Rubik', sans-serif;
-            background-color: #af7348; /* Set the background color */
+            background-color: #fff;
+            color: #000;
+            overflow-x: hidden;
         }
-        .navigation {
+
+        /* === HEADER STYLES === */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-            z-index: 1000;
+            height: 80px;
             display: flex;
-            justify-content: center; /* Center the navigation buttons */
-            align-items: center; /* Center items vertically */
-        }
-        .navigation a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: all 0.3s ease; /* Add a transition effect for smooth animation */
-        }
-        .navigation a:hover {
-            color: #af7348; /* Change the color on hovering */
-            transform: scale(1.1); /* Enlarge the button slightly on hovering */
-        }
-        .navigation a:active {
-            color: #ff5100; /* Change the color when the button is clicked (active) */
-        }
-        .logo-photo-container {
-            position: fixed;
-            top: 2px; /* Adjust the vertical position of the photo */
-            right: 20px; /* Adjust the horizontal position of the photo */
-            width: 40px; /* Adjust the width and height of the photo */
-            height: 40px;
-            background-image: url('images/Felora Design (Just the Emblem No Background).png');
-            background-size: cover;
-            background-position: center;
-            border-radius: 50%; /* Makes the photo circular */
-        }
-        .collection-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 40px;
-        }
-        .collection-item {
-            margin: 20px;
-            max-width: 300px;
-            text-align: center;
-            background-color: #fff; /* Add a white background color */
-            border-radius: 8px; /* Add rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-            transition: transform 0.2s ease; /* Add a smooth transition effect */
-        }
-        .collection-item:hover {
-            transform: translateY(-5px); /* Add a slight hover effect */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Make the photo pop on hover */
-        }
-        .collection-item img {
-            display: block; /* Set the image to display as a block */
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px 8px 0 0; /* Rounded top corners */
-            margin-bottom: 0; /* Remove the bottom margin */
-        }
-        .collection-item-title {
-            padding: 10px;
-            font-size: 15px;
-            font-weight: 500;
+            padding: 0 40px;
+            z-index: 1000;
+            transition: all 0.4s var(--transition);
         }
 
-        .home {
+        .header.scrolled, .header.hover {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+        }
+
+        .burger-menu {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .burger-menu:hover {
+            transform: scale(1.05);
+        }
+
+        .burger-icon {
+            width: 24px;
+            height: 16px;
+            position: relative;
+            margin-right: 10px;
+        }
+
+        .burger-icon span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled .burger-icon span,
+        .header.hover .burger-icon span,
+        .menu-open .burger-icon span {
+            background-color: #000;
+        }
+
+        .burger-icon span:nth-child(1) { top: 0; }
+        .burger-icon span:nth-child(2) { top: 7px; }
+        .burger-icon span:nth-child(3) { top: 14px; }
+
+        .menu-open .burger-icon span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 7px;
+        }
+
+        .menu-open .burger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-open .burger-icon span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 7px;
+        }
+
+        .menu-text {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        .header.scrolled .menu-text,
+        .header.hover .menu-text,
+        .menu-open .menu-text {
+            color: #000;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.4s ease;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.4s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-light {
+            filter: brightness(0) invert(1);
+        }
+
+        .header.scrolled .logo-light,
+        .header.hover .logo-light {
+            filter: brightness(0) invert(0);
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: -40%;
+            width: 40%;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            transition: left 0.6s var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .menu-dimmer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .menu-dimmer.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-overlay.open {
+            left: 0;
+        }
+
+        .menu-items {
+            list-style: none;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease 0.3s;
+        }
+
+        .menu-overlay.open .menu-items {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .menu-items li {
+            margin: 25px 0;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        .menu-items a {
+            display: inline-block;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #000;
+            position: relative;
+            transition: all 0.4s var(--transition);
+            transform: translateY(100%);
+        }
+
+        .menu-items a:hover {
+            transform: scale(1.05);
+            color: var(--brand-color);
+        }
+
+        .menu-overlay.open .menu-items a {
+            transform: translateY(0);
+            transition-delay: calc(0.1s * var(--item-index));
+        }
+
+        .menu-items a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--brand-color);
+            transition: width 0.4s ease;
+        }
+
+        .menu-items a:hover::after {
+            width: 100%;
+        }
+
+        /* === HERO SECTION === */
+        .collection-hero {
             position: relative;
             width: 100%;
-            min-height: calc(10vh - 70px); /* Set minimum height to ensure content is visible below the navigation bar */
+            height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('D:/Web Design/Felora Design/images-and-videos/collection-bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 40px;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* === COLLECTION GRID === */
+        .collection-section {
+            padding: 80px 40px;
+            background: #fff;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 125%;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            cursor: zoom-in;
+            /* FIXED: Disable clicks on hidden images */
+            pointer-events: none;
+        }
+
+        .product-image.active {
+            opacity: 1;
+            /* FIXED: Enable clicks only on visible image */
+            pointer-events: auto;
+        }
+
+        /* Navigation Arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-arrow:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-arrow svg {
+            width: 20px;
+            height: 20px;
+            stroke: #000;
+        }
+
+        .product-card:hover .nav-arrow {
+            opacity: 1;
+        }
+
+        .nav-arrow.prev {
+            left: 10px;
+        }
+
+        .nav-arrow.next {
+            right: 10px;
+        }
+
+        .product-info {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .product-price {
+            font-size: 14px;
+            font-weight: 300;
+            color: #666;
+            letter-spacing: 0.5px;
+        }
+
+        /* Pagination Dots */
+        .pagination-dots {
             display: flex;
             justify-content: center;
+            gap: 6px;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--brand-color);
+            transform: scale(1.2);
+        }
+
+        /* === FULLSCREEN VIEWER === */
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s var(--transition), visibility 0.4s var(--transition);
+            display: flex;
             align-items: center;
-            flex-direction: column;
-            color: white;
-            padding-top: 70px;
+            justify-content: center;
         }
 
-        .text {
-                font-size: 20px; /* Adjust the font size for mobile devices */
-                text-align: center;
-                position: flex;
-                left: 100;
-                background-color: #b18260;
-                padding: 10px;
+        .fullscreen-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        /* Media query for mobile devices */
-        @media (max-width: 600px) {
-            .navigation {
-                flex-direction: row; /* Align navigation buttons horizontally */
-                justify-content: flex-start; /* Push buttons to the left */
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            cursor: zoom-out;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Fullscreen Close Button */
+        .close-fullscreen {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            z-index: 2001;
+        }
+
+        .close-fullscreen:hover {
+            opacity: 1;
+        }
+
+        .close-fullscreen svg {
+            width: 100%;
+            height: 100%;
+            stroke: #fff;
+            stroke-width: 2;
+        }
+
+        /* Fullscreen Navigation Arrows */
+        .fullscreen-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            z-index: 2001;
+        }
+
+        .fullscreen-arrow:hover {
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .fullscreen-arrow svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+            stroke-width: 2;
+        }
+
+        .fullscreen-arrow.prev {
+            left: 30px;
+        }
+
+        .fullscreen-arrow.next {
+            right: 30px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .menu-overlay {
+                width: 70%;
+                left: -70%;
             }
-            .navigation a {
-                margin: 5px 10px; /* Add some spacing between the buttons */
+
+            .hero-title {
+                font-size: 36px;
             }
-            .logo-photo-container {
-                top: 10px;
-                right: 10px;
-                width: 30px;
-                height: 30px;
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .collection-grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 30px;
+            }
+
+            .menu-items a {
+                font-size: 28px;
+            }
+
+            .header {
+                padding: 0 20px;
+            }
+
+            .collection-section {
+                padding: 60px 20px;
+            }
+
+            .fullscreen-arrow {
+                width: 40px;
+                height: 40px;
+            }
+
+            .fullscreen-arrow.prev {
+                left: 15px;
+            }
+
+            .fullscreen-arrow.next {
+                right: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="navigation">
-        <a href="index.html">Home</a>
-        <a href="collection.html">Collection</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <div class="logo-photo-container"></div>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="burger-menu" id="burgerMenu">
+            <div class="burger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <span class="menu-text">Menu</span>
+        </div>
+        
+        <div class="logo-container">
+            <img src="images-and-videos/logo.png" 
+                 alt="Felora Design Logo" 
+                 class="logo logo-light" 
+                 id="logo">
+        </div>
+    </header>
+
+    <!-- Menu Dimmer -->
+    <div class="menu-dimmer" id="menuDimmer"></div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+        <ul class="menu-items">
+            <li style="--item-index: 1;"><a href="index.html">Home</a></li>
+            <li style="--item-index: 2;"><a href="about.html">About</a></li>
+            <li style="--item-index: 3;"><a href="collection.html">Collection</a></li>
+            <li style="--item-index: 4;"><a href="contact.html">Contact</a></li>
+        </ul>
     </div>
 
-    <div class="home" id="home">
-    
-    <div class="text">
-        <h2>COLLECTION</h2> <p></p>
-        Welcome to Felora Design's Collection page, where sophistication and empowerment converge in a curated selection of exclusive outfits. Each ensemble is a testament to the beauty of individuality, embracing every woman's distinct curves and style.
+    <!-- Hero Section -->
+    <section class="collection-hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">COLLECTION</h1>
+            <div class="hero-description">
+                Welcome to Felora Design's Collection page, where sophistication and empowerment converge in a curated selection of exclusive outfits. Each ensemble is a testament to the beauty of individuality, embracing every woman's distinct curves and style. To acquire your desired outfit, simply provide the unique product ID, and our team will ensure a seamless ordering process. Moreover, we wholeheartedly embrace personalization, inviting you to share your preferences, enabling us to tailor the outfit to your individual taste and desires. At Felora Design, we are committed to empowering women through fashion, and our dedicated customer support is here to assist you every step of the way. Join us in celebrating elegance, allure, and the spirit of femininity.
+            </div>
+        </div>
+    </section>
 
-To acquire your desired outfit, simply provide the unique product ID, and our team will ensure a seamless ordering process. Moreover, we wholeheartedly embrace personalization, inviting you to share your preferences, enabling us to tailor the outfit to your individual taste and desires.
+    <!-- Collection Section -->
+    <section class="collection-section">
+        <div class="collection-grid" id="collectionGrid">
+            <!-- Products will be dynamically generated here -->
+        </div>
+    </section>
 
-At Felora Design, we are committed to empowering women through fashion, and our dedicated customer support is here to assist you every step of the way. Join us in celebrating elegance, allure, and the spirit of femininity. </div>
-
+    <!-- Fullscreen Image Viewer -->
+    <div class="fullscreen-overlay" id="fullscreenOverlay">
+        <div class="close-fullscreen" id="closeFullscreen">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </div>
+        <div class="fullscreen-arrow prev" id="fullscreenPrev">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </div>
+        <img class="fullscreen-image" id="fullscreenImage" src="" alt="">
+        <div class="fullscreen-arrow next" id="fullscreenNext">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
     </div>
-    <div class="collection-grid">
 
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1BWtszwWxzx8ePHp4M1OW_cJquWwNeXbt" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1BWtszwWxzx8ePHp4M1OW_cJquWwNeXbt&sz=w1500" alt="Shadow Crest">
-            </a>
-            <div class="collection-item-title">Shadow Crest</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1YiZfEoPRGZTnN0wK-wuSjgLMVaXhdVCo" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1YiZfEoPRGZTnN0wK-wuSjgLMVaXhdVCo&sz=w1500" alt="Shadow Crest">
-            </a>
-            <div class="collection-item-title">Shadow Crest</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1WHbFqEtmM-U1Pb69f_X8Ypk3yeYTqAfg" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1WHbFqEtmM-U1Pb69f_X8Ypk3yeYTqAfg&sz=w1500" alt="Shadow Crest">
-            </a>
-            <div class="collection-item-title">Crimson Eclipse</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=16mWwpeXKwRLUxGPsfEQGmUvg9DP-xNKs" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=16mWwpeXKwRLUxGPsfEQGmUvg9DP-xNKs&sz=w1500" alt="Shadow Crest">
-            </a>
-            <div class="collection-item-title">Crimson Eclipse</div>
-        </div>
+    <script>
+        // Product data with multiple images per product
+        // ============================================
+        // LOCAL DEVELOPMENT: Use relative paths with forward slashes
+        // GITHUB PAGES: Uncomment and adjust paths as needed
         
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1_vVxssK8ENAV1VgukhPoSQajCEL83zPR" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1_vVxssK8ENAV1VgukhPoSQajCEL83zPR&sz=w1500" alt="Shadow Crest">
-            </a>
-            <div class="collection-item-title">Desert Phantom</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1lwZji5CrRmnDsS5RHsrCjCMvx-hC-Hul" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1lwZji5CrRmnDsS5RHsrCjCMvx-hC-Hul&sz=w1500" alt="Shadow Crest">
-            </a>
-            <div class="collection-item-title">Desert Phantom</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1uMUw4IpD0-98kNqN7fodCzskKM9mUeev" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1uMUw4IpD0-98kNqN7fodCzskKM9mUeev&sz=w1500" alt="Starlit Veil">
-            </a>
-            <div class="collection-item-title">Starlit Veil</div>
-        </div>     
-        
-        
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1WVfLqc334FdKvcUdeMDFVdoaV9pcU14O" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1WVfLqc334FdKvcUdeMDFVdoaV9pcU14O&sz=w1500" alt="Starlit Veil">
-            </a>
-            <div class="collection-item-title">Starlit Veil</div>
-        </div>  
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1lzsEAbUIFw_FDPK2oPVJOTaziUWlyi0c" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1lzsEAbUIFw_FDPK2oPVJOTaziUWlyi0c&sz=w1500" alt="Velora Shell">
-            </a>
-            <div class="collection-item-title">Velora Shell</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1vTmdycas9PVASU3M__cz8WVE0S08dXXf" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1vTmdycas9PVASU3M__cz8WVE0S08dXXf&sz=w1500" alt="Velora Shell">
-            </a>
-            <div class="collection-item-title">Velora Shell</div>
-        </div>         
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=12WNZ7DaQcLb4WIoyJ9NJf7zJtBe0Ul2t" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=12WNZ7DaQcLb4WIoyJ9NJf7zJtBe0Ul2t&sz=w1500" alt="Opal Flux">
-            </a>
-            <div class="collection-item-title">Opal Flux</div>
-        </div>         
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=14YF8nVRqT-UVfC76BlrRY4I-nCWWBFyq" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=14YF8nVRqT-UVfC76BlrRY4I-nCWWBFyq&sz=w1500" alt="Opal Flux">
-            </a>
-            <div class="collection-item-title">Opal Flux</div>
-        </div>    
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1hdCp2fcdEPbqtyOm-YUosOHVssmKC9Xw" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1hdCp2fcdEPbqtyOm-YUosOHVssmKC9Xw&sz=w1500" alt="Tide Serpent">
-            </a>
-            <div class="collection-item-title">Tide Serpent</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1qyLjeC8qTZjoN3Z71Cyg3U7TUf868tIa" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1qyLjeC8qTZjoN3Z71Cyg3U7TUf868tIa&sz=w1500" alt="Tide Serpent">
-            </a>
-            <div class="collection-item-title">Tide Serpent</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1NWJWg8aQkWiL0NCgkA2_lZxj-lMAdpVu" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1NWJWg8aQkWiL0NCgkA2_lZxj-lMAdpVu&sz=w1500" alt="Midnight Mantle">
-            </a>
-            <div class="collection-item-title">Midnight Mantle</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=18DeYlrFOrjHfweG8-c69sW8U9tm_Ed11" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=18DeYlrFOrjHfweG8-c69sW8U9tm_Ed11&sz=w1500" alt="Midnight Mantle">
-            </a>
-            <div class="collection-item-title">Midnight Mantle</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1PTZswgx-_i8ezA6syHzg4cWpCX572ZFM" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1PTZswgx-_i8ezA6syHzg4cWpCX572ZFM&sz=w1500" alt="Ravenveil">
-            </a>
-            <div class="collection-item-title">Ravenveil</div>
-        </div> 
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1NLME10tQadNHV-zw81q4nGaaubD3n-Ic" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1NLME10tQadNHV-zw81q4nGaaubD3n-Ic&sz=w1500" alt="Ravenveil">
-            </a>
-            <div class="collection-item-title">Ravenveil</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1IZdCXb0b2ECJPOqbA_EEZ1KBGCBSHhnX" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1IZdCXb0b2ECJPOqbA_EEZ1KBGCBSHhnX&sz=w1500" alt="Ravenclutch">
-            </a>
-            <div class="collection-item-title">Ravenclutch</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1iTCq5dEvtLWedzh_z8xXzJGcdux0uRPF" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1iTCq5dEvtLWedzh_z8xXzJGcdux0uRPF&sz=w1500" alt="The Corvid Cloak">
-            </a>
-            <div class="collection-item-title">The Corvid Cloak</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1hG7pInvofGe9JrAKbNf3icWW5WuonyMy" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1hG7pInvofGe9JrAKbNf3icWW5WuonyMy&sz=w1500" alt="The Corvid Cloak">
-            </a>
-            <div class="collection-item-title">The Corvid Cloak</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1VbE_O0f0Alg_QWmoRZYFv1C7KgKSPhq4" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1VbE_O0f0Alg_QWmoRZYFv1C7KgKSPhq4&sz=w1500" alt="Lunar Plumage">
-            </a>
-            <div class="collection-item-title">Lunar Plumage</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1khkkGlWSYS3gzRRGnQuRiEU3LfRAh_8I" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1khkkGlWSYS3gzRRGnQuRiEU3LfRAh_8I&sz=w1500" alt="Lunar Plumage">
-            </a>
-            <div class="collection-item-title">Lunar Plumage</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=15Nf734a-cgAQQ97kPi68a5mGrto8xjGx" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=15Nf734a-cgAQQ97kPi68a5mGrto8xjGx&sz=w1500" alt="Lunar Plumage">
-            </a>
-            <div class="collection-item-title">Lunar Plumage</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1mgOL6RGXGQriMXUTuL6R01RzaD8p4MiA" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1mgOL6RGXGQriMXUTuL6R01RzaD8p4MiA&sz=w1500" alt="Celestial Flow">
-            </a>
-            <div class="collection-item-title">Celestial Flow</div>
-        </div> 
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1__nk6WIq07NgyOm8zXslwuJS41LZyeLw" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1__nk6WIq07NgyOm8zXslwuJS41LZyeLw&sz=w1500" alt="Celestial Flow">
-            </a>
-            <div class="collection-item-title">Celestial Flow</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1NGTQ97ommsH_PIjz5sA5dC-YtxMzhWGM" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1NGTQ97ommsH_PIjz5sA5dC-YtxMzhWGM&sz=w1500" alt="Golden Crossroads">
-            </a>
-            <div class="collection-item-title">Golden Crossroads</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1cCVNEagwROFYERRTYXDux3Uep5I6xcjh" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1cCVNEagwROFYERRTYXDux3Uep5I6xcjh&sz=w1500" alt="Golden Crossroads">
-            </a>
-            <div class="collection-item-title">Golden Crossroads</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1BYbk9RjO25x2CjAg9gXNdKPWle3yq1dP" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1BYbk9RjO25x2CjAg9gXNdKPWle3yq1dP&sz=w1500" alt="Golden Crossroads">
-            </a>
-            <div class="collection-item-title">Golden Crossroads</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1LUWA-1Ako_flYdmGgnVvWptqumaT8Mm1" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1LUWA-1Ako_flYdmGgnVvWptqumaT8Mm1&sz=w1500" alt="Golden Crossroads">
-            </a>
-            <div class="collection-item-title">Golden Crossroads</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1bft7f_DRVXuOrSC9h7V6Hqt_8-9IEJSY" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1bft7f_DRVXuOrSC9h7V6Hqt_8-9IEJSY&sz=w1500" alt="Golden Crossroads">
-            </a>
-            <div class="collection-item-title">Golden Crossroads</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1w1w1hSkK9krocJY98HKaLdhPhO79bWZZ" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1w1w1hSkK9krocJY98HKaLdhPhO79bWZZ&sz=w1500" alt="Silk Mirage">
-            </a>
-            <div class="collection-item-title">Silk Mirage</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1wu3GqRUmHJZMTwlehx2hEm5_YAYuk61P" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1wu3GqRUmHJZMTwlehx2hEm5_YAYuk61P&sz=w1500" alt="Silk Mirage">
-            </a>
-            <div class="collection-item-title">Silk Mirage</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=10fEXZiGMe9-9Mf_z4SpiScjoI7o_WX5D" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=10fEXZiGMe9-9Mf_z4SpiScjoI7o_WX5D&sz=w1500" alt="Silk of Isis">
-            </a>
-            <div class="collection-item-title">Silk of Isis</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1acTHUuv1lEfrBsUEcMw9_53rVpK3lTjv" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1acTHUuv1lEfrBsUEcMw9_53rVpK3lTjv&sz=w1500" alt="Silk of Isis">
-            </a>
-            <div class="collection-item-title">Silk of Isis</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1KUEsixMB5zTZP6dxHDbG8tn3qwi3H2EY" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1KUEsixMB5zTZP6dxHDbG8tn3qwi3H2EY&sz=w1500" alt="Silk of Isis">
-            </a>
-            <div class="collection-item-title">Silk of Isis</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1dp88OQYZ3Tn8mI65MlbA7eiGSzR-BrYg" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1dp88OQYZ3Tn8mI65MlbA7eiGSzR-BrYg&sz=w1500" alt="Ceremonial Silk">
-            </a>
-            <div class="collection-item-title">Ceremonial Silk</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1ZmDdTsm294EC9akiqSNG5jSQIhNEiGrT" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1ZmDdTsm294EC9akiqSNG5jSQIhNEiGrT&sz=w1500" alt="Divine Drape">
-            </a>
-            <div class="collection-item-title">Divine Drape</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1QVnistfNiQfJraDNxnpNigiudBu5DTcD" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1QVnistfNiQfJraDNxnpNigiudBu5DTcD&sz=w1500" alt="Divine Drape">
-            </a>
-            <div class="collection-item-title">Divine Drape</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1JwsNWxYSAwVW5VcTsx9klgvAlKuFTv5C" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1JwsNWxYSAwVW5VcTsx9klgvAlKuFTv5C&sz=w1500" alt="Crossfade Silk">
-            </a>
-            <div class="collection-item-title">Crossfade Silk</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="https://drive.google.com/uc?export=view&id=1-wIXzoj9M1iA0I4Jp1vM0zUDaWFJzlUP" target="_blank">
-                <img src="https://drive.google.com/thumbnail?id=1-wIXzoj9M1iA0I4Jp1vM0zUDaWFJzlUP&sz=w1500" alt="Crossfade Silk">
-            </a>
-            <div class="collection-item-title">Crossfade Silk</div>
-        </div> 
-
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028582.png" target="_blank">  
-                <img src="images/marine_collection/1000028582.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Blossom in Ivory</div>
-        </div>
-        
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028601.png" target="_blank">  
-                <img src="images/marine_collection/1000028601.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Blossom in Ivory</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028578.png" target="_blank">  
-                <img src="images/marine_collection/1000028578.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Blossom in Ivory</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028587.png" target="_blank">  
-                <img src="images/marine_collection/1000028587.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Tropical Ember</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028591.png" target="_blank">  
-                <img src="images/marine_collection/1000028591.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Tropical Ember</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028579.png" target="_blank">  
-                <img src="images/marine_collection/1000028579.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Sunlit Breeze</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028588.png" target="_blank">  
-                <img src="images/marine_collection/1000028588.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Sunlit Breeze</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028598.png" target="_blank">  
-                <img src="images/marine_collection/1000028598.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Sunlit Breeze</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028580.png" target="_blank">  
-                <img src="images/marine_collection/1000028580.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Velvet Rose</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028585.png" target="_blank">  
-                <img src="images/marine_collection/1000028585.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Velvet Rose</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028998.png" target="_blank">  
-                <img src="images/marine_collection/1000028998.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Velvet Rose</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028584.png" target="_blank">  
-                <img src="images/marine_collection/1000028584.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Velvet Rose</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028583.png" target="_blank">  
-                <img src="images/marine_collection/1000028583.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Blush Denim</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028589.png" target="_blank">  
-                <img src="images/marine_collection/1000028589.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Blush Denim</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000029001.png" target="_blank">  
-                <img src="images/marine_collection/1000029001.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Blush Denim</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028581.png" target="_blank">  
-                <img src="images/marine_collection/1000028581.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Shadow Puff</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028602.png" target="_blank">  
-                <img src="images/marine_collection/1000028602.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Shadow Puff</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028999.png" target="_blank">  
-                <img src="images/marine_collection/1000028999.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Shadow Puff</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000029000.png" target="_blank">  
-                <img src="images/marine_collection/1000029000.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Shadow Puff</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028597.png" target="_blank">  
-                <img src="images/marine_collection/1000028597.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Starry Tide</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028599.png" target="_blank">  
-                <img src="images/marine_collection/1000028599.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Starry Tide</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028586.png" target="_blank">  
-                <img src="images/marine_collection/1000028586.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Soft Garden Vest</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028592.png" target="_blank">  
-                <img src="images/marine_collection/1000028592.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Soft Garden Vest</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028590.png" target="_blank">  
-                <img src="images/marine_collection/1000028590.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Geometric Horizon</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028596.png" target="_blank">  
-                <img src="images/marine_collection/1000028596.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Geometric Horizon</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028593.png" target="_blank">  
-                <img src="images/marine_collection/1000028593.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Heritage Grid Vest</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028594.png" target="_blank">  
-                <img src="images/marine_collection/1000028594.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Heritage Grid Vest</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028595.png" target="_blank">  
-                <img src="images/marine_collection/1000028595.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Tradition in Cream</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/marine_collection/1000028600.png" target="_blank">  
-                <img src="images/marine_collection/1000028600.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Tradition in Cream</div>
-        </div>
-
-    
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2716.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2716.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Vanilla Silk</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2717.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2717.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Vanilla Silk</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2718.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2718.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Vanilla Silk</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2719.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2719.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Skyline Serenity</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2720.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2720.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Skyline Serenity</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2721.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2721.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Monochrome Wave Symphony</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2722.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2722.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Monochrome Wave Symphony</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2723.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2723.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Seaside Breeze</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2724.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2724.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Seaside Breeze</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2725.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2725.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Sunshine Safari</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2726.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2726.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Sunshine Safari</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2727.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2727.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Breeze Whisper</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2728.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2728.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Breeze Whisper</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2729.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2729.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Electric Meadow</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2730.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2730.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Electric Meadow</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2731.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2731.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Khaki Breeze</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2732.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2732.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Khaki Breeze</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2733.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2733.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Rose Gold Elegance</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2734.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2734.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Rose Gold Elegance</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2735.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2735.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Rose Gold Elegance</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2736.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2736.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Olive Enchantment</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2737.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2737.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Olive Enchantment</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2738.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2738.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Olive Enchantment</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2739.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2739.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Pearl Blossom</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2740.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2740.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Pearl Blossom</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2741.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2741.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Pearl Blossom</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2742.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2742.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Garden Jewel</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2743.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2743.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Garden Jewel</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2744.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2744.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Garden Jewel</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2745.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2745.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Ribboned Midnight Flora</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2746.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2746.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Ribboned Midnight Flora</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2747.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2747.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Ribboned Midnight Flora</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2748.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2748.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Echo</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2749.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2749.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Echo</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2750.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2750.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Luxe</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2752.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2752.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Luxe</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/summer_collection/IMG_2753.jpg" target="_blank">  
-                <img src="images/summer_collection/IMG_2753.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Luxe</div>
-        </div>
-
-        
-        <div class="collection-item">
-            <a href="images/Black Outfit/1.png" target="_blank">  
-                <img src="images/Black Outfit/1.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Casual Luxe</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Black Outfit/2.png" target="_blank">  
-                <img src="images/Black Outfit/2.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Casual Luxe</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Black Outfit/3.png" target="_blank">  
-                <img src="images/Black Outfit/3.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Casual Luxe</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Pink Outfit/1.png" target="_blank">  
-                <img src="images/Pink Outfit/1.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Pink Frost</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Pink Outfit/2.png" target="_blank">  
-                <img src="images/Pink Outfit/2.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Pink Frost</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Pink Outfit/3.png" target="_blank">  
-                <img src="images/Pink Outfit/3.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Pink Frost</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Pink Outfit/4.png" target="_blank">  
-                <img src="images/Pink Outfit/4.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Pink Frost</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/White with Black Patterns/1.png" target="_blank">  
-                <img src="images/White with Black Patterns/1.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Monochrome Majesty</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/White with Black Patterns/2.png" target="_blank">  
-                <img src="images/White with Black Patterns/2.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Monochrome Majesty</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Red Strip with Flowers/1.png" target="_blank">  
-                <img src="images/Red Strip with Flowers/1.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Crimson Garden Velvet</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Red Strip with Flowers/2.png" target="_blank">  
-                <img src="images/Red Strip with Flowers/2.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Crimson Garden Velvet</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Red Strip with Flowers/3.png" target="_blank">  
-                <img src="images/Red Strip with Flowers/3.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Crimson Garden Velvet</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Red Trim Outfit/1.png" target="_blank">  
-                <img src="images/Red Trim Outfit/1.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Velvet Noir Enigma</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Red Trim Outfit/2.png" target="_blank">  
-                <img src="images/Red Trim Outfit/2.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Velvet Noir Enigma</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Red Trim Outfit/3.png" target="_blank">  
-                <img src="images/Red Trim Outfit/3.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Velvet Noir Enigma</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Navy Blue with Flowers/1.png" target="_blank">  
-                <img src="images/Navy Blue with Flowers/1.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Sakura Fractal Elegance</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Navy Blue with Flowers/2.png" target="_blank">  
-                <img src="images/Navy Blue with Flowers/2.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Sakura Fractal Elegance</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Navy Blue with Flowers/3.png" target="_blank">  
-                <img src="images/Navy Blue with Flowers/3.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Sakura Fractal Elegance</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Flowers Outfit/1.png" target="_blank">  
-                <img src="images/Flowers Outfit/1.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Floral Dream</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Flowers Outfit/2.png" target="_blank">  
-                <img src="images/Flowers Outfit/2.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Floral Dream</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/Flowers Outfit/3.png" target="_blank">  
-                <img src="images/Flowers Outfit/3.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Midnight Floral Dream</div>
-        </div>
-
-
- <!--
-        <div class="collection-item">
-            <a href="images/new_collection_2024/IMG_1964.jpg" target="_blank">  
-                <img src="images/new_collection_2024/IMG_1964.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Gilded Plumage</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/new_collection_2024/IMG_1981.jpg" target="_blank">  
-                <img src="images/new_collection_2024/IMG_1981.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Gilded Plumage</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/new_collection_2024/IMG_2021.jpg" target="_blank">  
-                <img src="images/new_collection_2024/IMG_2021.jpg" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Gilded Plumage</div>
-        </div>
--->
-        
-<!--
-        <div class="collection-item">
-            <a href="images/IMG_1708.png" target="_blank"> 
-                <img src="images/IMG_1708.png" alt="Sportswear Style">
-            </a>
-            <div class="collection-item-title">Whimsical Waves</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/IMG_2073.png" target="_blank"> 
-                <img src="images/IMG_2073.png" alt="Formal Style">
-            </a>
-            <div class="collection-item-title">Whimsical Waves</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/IMG_1175.png" target="_blank">  
-                <img src="images/IMG_1175.png" alt="Eveningwear Style">
-            </a>
-           <div class="collection-item-title">Floral Fusion</div>
-        </div>
-
-        <div class="collection-item">
-            <a href="images/IMG_1047.png" target="_blank">  
-                <img src="images/IMG_1047.png" alt="Casual Style">
-            </a>
-           <div class="collection-item-title">Mystic Moonlight</div> 
-        </div>
-
-        <div class="collection-item">
-            <a href="images/IMG_1058.png" target="_blank">  
-                <img src="images/IMG_1058.png" alt="Sportswear Style">
-            </a>
-            <div class="collection-item-title">Mystic Moonlight</div> 
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1588.png" target="_blank">  
-                <img src="images/IMG_1588.png" alt="Eveningwear Style">
-            </a>
-           <div class="collection-item-title">Spanish Elegancia</div>
-        </div>
-
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1577.png" target="_blank">  
-                <img src="images/IMG_1577.png" alt="Eveningwear Style">
-            </a>
-           <div class="collection-item-title">Gilded Plumage</div>
-        </div>
-
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1886.png" target="_blank">  
-                <img src="images/IMG_1886.png" alt="Eveningwear Style">
-            </a>
-            <div class="collection-item-title">Gilded Plumage</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1691.png" target="_blank">  
-                <img src="images/IMG_1691.png" alt="Eveningwear Style">
-            </a>
-           <div class="collection-item-title">Golden Azure</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1737.png" target="_blank">  
-                <img src="images/IMG_1737.png" alt="Eveningwear Style">
-            </a>
-           <div class="collection-item-title">Mariposa Noche Azul</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1081.png" target="_blank">  
-                <img src="images/IMG_1081.png" alt="Eveningwear Style">
-            </a>
-           <div class="collection-item-title">Vanilla Bloom</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1095.png" target="_blank">  
-                <img src="images/IMG_1095.png" alt="Eveningwear Style">
-            </a>
-            <div class="collection-item-title">Vanilla Bloom</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1495.png" target="_blank">  
-                <img src="images/IMG_1495.png" alt="Eveningwear Style">
-            </a>
-           <div class="collection-item-title">Black Sea Salt</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1515.png" target="_blank">  
-                <img src="images/IMG_1515.png" alt="Eveningwear Style">
-            </a>
-            <div class="collection-item-title">Black Sea Salt</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1407.png" target="_blank">  
-                <img src="images/IMG_1407.png" alt="Eveningwear Style">
-            </a>
-           <div class="collection-item-title">Murasaki Nohana</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1352.png" target="_blank">  
-                <img src="images/IMG_1352.png" alt="Eveningwear Style">
-            </a>
-            <div class="collection-item-title">Murasaki Nohana</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1461.png" target="_blank">  
-                <img src="images/IMG_1461.png" alt="Eveningwear Style">
-            </a>
-           <div class="collection-item-title">Floral Glimmer</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1475.png" target="_blank">  
-                <img src="images/IMG_1475.png" alt="Eveningwear Style">
-            </a>
-            <div class="collection-item-title">Floral Glimmer</div>
-        </div>
-
-
-        <div class="collection-item">
-            <a href="images/IMG_1997.png" target="_blank">  
-                <img src="images/IMG_1997.png" alt="Eveningwear Style">
-            </a>
-            <div class="collection-item-title">Bold Contrast Chic</div>
-        </div>   
-        
-
-        <div class="collection-item">
-            <a href="images/IMG_1994.png" target="_blank">  
-                <img src="images/IMG_1994.png" alt="Eveningwear Style">
-            </a>
-            <div class="collection-item-title">Bold Contrast Chic</div>
-        </div>  
-
-
-        <div class="collection-item">
-            <a href="images/IMG_2405.png" target="_blank">  
-                <img src="images/IMG_2405.png" alt="Eveningwear Style">
-            </a>
-            <div class="collection-item-title">Midas' Delight</div>
-        </div>  -->
-        
-    </div> 
-
+        const products = [
+            {
+                name: "The Midnight Ruby",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_1-1.png",
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_1-2.png"
+                ]
+            },
+            {
+                name: "Graphite Passage",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_2-1.png",
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_2-2.png"
+                ]
+            },
+            {
+                name: "The Autumn Truffle",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_3-1.png",
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_3-2.png"
+                ]
+            },
+            {
+                name: "Nightfall Noir",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_4-1.png",
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_4-2.png"
+                ]
+            },
+            {
+                name: "The Tectonic Shift",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_5-1.png",
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_5-2.png"
+                ]
+            },
+            {
+                name: "The Raven's Regalia",
+                price: "$1,520",
+                images: [
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_6-1.png",
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_6-2.png"
+                ]
+            },
+
+            {
+                name: "Caramel Duster",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_7-1.png",
+                    "images-and-videos/COLLECTION/2025-fall-collection/compressed_7-2.png"
+                ]
+            },
+            {
+                name: "Shadow Crest",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/1.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/2.png"
+                ]
+            },
+            {
+                name: "Crimson Eclipse",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/3.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/4.png"
+                ]
+            },
+
+            {
+                name: "Desert Phantom",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/5.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/6.png"
+                ]
+            },
+            {
+                name: "Starlit Veil",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/7.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/8.png"
+                ]
+            },
+            {
+                name: "Velora Shell",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/9.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/10.png"
+                ]
+            },
+            {
+                name: "Opal Flux",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/11.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/12.png"
+                ]
+            },
+            {
+                name: "Tide Serpent",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/13.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/14.png"
+                ]
+            },
+
+            {
+                name: "Midnight Mantle",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/15.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/16.png"
+                ]
+            },
+            {
+                name: "Ravenclutch",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/16-1.png"
+                ]
+            },
+            {
+                name: "Ravenveil",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/17.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/18.png"
+                ]
+            },
+            {
+                name: "The Corvid Cloak",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/19.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/20.png"
+                ]
+            },
+            {
+                name: "Lunar Plumage",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/21.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/22.png",                    
+                    "images-and-videos/COLLECTION/2025-spring-collection/23.png"
+                ]
+            },
+
+            {
+                name: "Celestial Flow",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/24.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/25.png"
+                ]
+            },
+            {
+                name: "Golden Crossroads",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/26.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/27.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/28.png",                      
+                    "images-and-videos/COLLECTION/2025-spring-collection/29.png",                      
+                    "images-and-videos/COLLECTION/2025-spring-collection/30.png"
+                ]
+            },
+            {
+                name: "Silk Mirage",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/31.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/32.png"
+                ]
+            },
+            {
+                name: "Silk of Isis",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/33.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/34.png",                    
+                    "images-and-videos/COLLECTION/2025-spring-collection/35.png"
+                ]
+            },
+            {
+                name: "Divine Drape",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/37.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/38.png"
+                ]
+            },
+
+            {
+                name: "Crossfade Silk",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/2025-spring-collection/39.png",
+                    "images-and-videos/COLLECTION/2025-spring-collection/40.png"
+                ]
+            },
+            {
+                name: "Blossom in Ivory",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/22.png",
+                    "images-and-videos/COLLECTION/marine-theme/23.png",                    
+                    "images-and-videos/COLLECTION/marine-theme/24.png"
+                ]
+            },
+            {
+                name: "Tropical Ember",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/5.png",                    
+                    "images-and-videos/COLLECTION/marine-theme/6.png"
+                ]
+            },
+            {
+                name: "Sunlit Breeze",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/7.png",
+                    "images-and-videos/COLLECTION/marine-theme/8.png",                    
+                    "images-and-videos/COLLECTION/marine-theme/9.png"
+                ]
+            },
+            {
+                name: "Velvet Rose",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/1.png",
+                    "images-and-videos/COLLECTION/marine-theme/2.png",  
+                    "images-and-videos/COLLECTION/marine-theme/3.png",                                       
+                    "images-and-videos/COLLECTION/marine-theme/4.png"
+                ]
+            },
+
+            {
+                name: "Blush Denim",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/25.png",
+                    "images-and-videos/COLLECTION/marine-theme/26.png",                    
+                    "images-and-videos/COLLECTION/marine-theme/27.png"
+                ]
+            },
+            {
+                name: "Shadow Puff",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/16.png",
+                    "images-and-videos/COLLECTION/marine-theme/17.png",  
+                    "images-and-videos/COLLECTION/marine-theme/18.png",                                       
+                    "images-and-videos/COLLECTION/marine-theme/19.png"
+                ]
+            },
+            {
+                name: "Starry Tide",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/28.png",                    
+                    "images-and-videos/COLLECTION/marine-theme/29.png"
+                ]
+            },
+            {
+                name: "Soft Garden Vest",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/20.png",                    
+                    "images-and-videos/COLLECTION/marine-theme/21.png"
+                ]
+            },
+            {
+                name: "Geometric Horizon",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/14.png",                    
+                    "images-and-videos/COLLECTION/marine-theme/15.png"
+                ]
+            },
+
+            {
+                name: "Heritage Grid Vest",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/12.png",                    
+                    "images-and-videos/COLLECTION/marine-theme/13.png"
+                ]
+            },
+            {
+                name: "Tradition in Cream",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/marine-theme/10.png",                    
+                    "images-and-videos/COLLECTION/marine-theme/11.png"
+                ]
+            },
+            {
+                name: "Vanilla Silk",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/3.png",
+                    "images-and-videos/COLLECTION/summer-collection/4.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/5.png"
+                ]
+            },
+            {
+                name: "Skyline Serenity",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/6.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/7.png"
+                ]
+            },
+            {
+                name: "Monochrome Wave Symphony",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/8.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/9.png"
+                ]
+            },
+
+            {
+                name: "Seaside Breeze",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/12.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/13.png"
+                ]
+            },
+            {
+                name: "Sunshine Safari",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/1.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/2.png"
+                ]
+            },
+            {
+                name: "Breeze Whisper",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/14.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/15.png"
+                ]
+            },
+            {
+                name: "Electric Meadow",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/10.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/11.png"
+                ]
+            },
+            {
+                name: "Khaki Breeze",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/16.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/17.png"
+                ]
+            },
+
+            {
+                name: "Midnight Rose Gold Elegance",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/18.png",  
+                    "images-and-videos/COLLECTION/summer-collection/19.png",                                      
+                    "images-and-videos/COLLECTION/summer-collection/20.png"
+                ]
+            },
+            {
+                name: "Olive Enchantment",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/21.png",  
+                    "images-and-videos/COLLECTION/summer-collection/22.png",                                      
+                    "images-and-videos/COLLECTION/summer-collection/23.png"
+                ]
+            },
+            {
+                name: "Midnight Pearl Blossom",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/24.png",  
+                    "images-and-videos/COLLECTION/summer-collection/25.png",                                      
+                    "images-and-videos/COLLECTION/summer-collection/26.png"
+                ]
+            },
+            {
+                name: "Midnight Garden Jewel",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/27.png",  
+                    "images-and-videos/COLLECTION/summer-collection/28.png",                                      
+                    "images-and-videos/COLLECTION/summer-collection/29.png"
+                ]
+            },
+            {
+                name: "Ribboned Midnight Flora",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/30.png",  
+                    "images-and-videos/COLLECTION/summer-collection/31.png",                                      
+                    "images-and-videos/COLLECTION/summer-collection/32.png"
+                ]
+            },
+
+            {
+                name: "Midnight Echo",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/33.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/34.png"
+                ]
+            },
+            {
+                name: "Midnight Luxe",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/summer-collection/35.png",                    
+                    "images-and-videos/COLLECTION/summer-collection/36.png",
+                    "images-and-videos/COLLECTION/summer-collection/37.png"                    
+                ]
+            },
+            {
+                name: "Midnight Floral Dream",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/fall-collection/1.png",
+                    "images-and-videos/COLLECTION/fall-collection/2.png",                    
+                    "images-and-videos/COLLECTION/fall-collection/3.png"
+                ]
+            },
+            {
+                name: "Crimson Garden Velvet",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/fall-collection/4.png",
+                    "images-and-videos/COLLECTION/fall-collection/5.png",                    
+                    "images-and-videos/COLLECTION/fall-collection/6.png"
+                ]
+            },
+            {
+                name: "Velvet Noir Enigma",
+                price: "$1,600",
+                images: [
+                    "images-and-videos/COLLECTION/fall-collection/7.png",
+                    "images-and-videos/COLLECTION/fall-collection/8.png",                    
+                    "images-and-videos/COLLECTION/fall-collection/9.png"
+                ]
+            },
+            {
+                name: "Sakura Fractal Elegance",
+                price: "$1,280",
+                images: [
+                    "images-and-videos/COLLECTION/fall-collection/10.png",
+                    "images-and-videos/COLLECTION/fall-collection/11.png",                    
+                    "images-and-videos/COLLECTION/fall-collection/12.png"
+                ]
+            },
+
+            {
+                name: "Monochrome Majesty",
+                price: "$1,200",
+                images: [
+                    "images-and-videos/COLLECTION/fall-collection/13.png",
+                    "images-and-videos/COLLECTION/fall-collection/14.png",                    
+                    "images-and-videos/COLLECTION/fall-collection/15.png"
+                ]
+            },
+            {
+                name: "Casual Luxe",
+                price: "$1,450",
+                images: [
+                    "images-and-videos/COLLECTION/fall-collection/16.png",
+                    "images-and-videos/COLLECTION/fall-collection/17.png",                    
+                    "images-and-videos/COLLECTION/fall-collection/18.png"
+                ]
+            },
+            {
+                name: "Pink Frost",
+                price: "$1,350",
+                images: [
+                    "images-and-videos/COLLECTION/fall-collection/19.png",
+                    "images-and-videos/COLLECTION/fall-collection/20.png",                    
+                    "images-and-videos/COLLECTION/fall-collection/21.png"
+                ]
+            }            
+
+            
+        ];
+
+        // Generate product cards
+        function generateProducts() {
+            const grid = document.getElementById('collectionGrid');
+            products.forEach((product, index) => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image-container">
+                        ${product.images.map((img, i) => 
+                            `<img src="${img}" alt="${product.name}" class="product-image ${i === 0 ? 'active' : ''}" data-product="${index}" data-index="${i}">`
+                        ).join('')}
+                        <div class="nav-arrow prev" data-product="${index}" data-direction="prev">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="nav-arrow next" data-product="${index}" data-direction="next">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">${product.price}</div>
+                        <div class="pagination-dots">
+                            ${product.images.map((_, i) => 
+                                `<div class="dot ${i === 0 ? 'active' : ''}" data-product="${index}" data-dot="${i}"></div>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(productCard);
+            });
+        }
+
+        // Product carousel functionality
+        function initCarousels() {
+            const carousels = {};
+
+            products.forEach((_, productIndex) => {
+                carousels[productIndex] = {
+                    currentIndex: 0,
+                    images: document.querySelectorAll(`.product-image[data-product="${productIndex}"]`),
+                    dots: document.querySelectorAll(`.dot[data-product="${productIndex}"]`)
+                };
+
+                // Arrow navigation
+                document.querySelectorAll(`.nav-arrow[data-product="${productIndex}"]`).forEach(arrow => {
+                    arrow.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const direction = arrow.dataset.direction;
+                        const carousel = carousels[productIndex];
+                        
+                        carousel.images[carousel.currentIndex].classList.remove('active');
+                        carousel.dots[carousel.currentIndex].classList.remove('active');
+                        
+                        if (direction === 'next') {
+                            carousel.currentIndex = (carousel.currentIndex + 1) % carousel.images.length;
+                        } else {
+                            carousel.currentIndex = (carousel.currentIndex - 1 + carousel.images.length) % carousel.images.length;
+                        }
+                        
+                        setTimeout(() => {
+                            carousel.images[carousel.currentIndex].classList.add('active');
+                            carousel.dots[carousel.currentIndex].classList.add('active');
+                        }, 50);
+                    });
+                });
+
+                // Dot navigation
+                document.querySelectorAll(`.dot[data-product="${productIndex}"]`).forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const dotIndex = parseInt(dot.dataset.dot);
+                        const carousel = carousels[productIndex];
+                        
+                        if (dotIndex === carousel.currentIndex) return;
+                        
+                        carousel.images[carousel.currentIndex].classList.remove('active');
+                        carousel.dots[carousel.currentIndex].classList.remove('active');
+                        
+                        carousel.currentIndex = dotIndex;
+                        
+                        setTimeout(() => {
+                            carousel.images[carousel.currentIndex].classList.add('active');
+                            carousel.dots[carousel.currentIndex].classList.add('active');
+                        }, 50);
+                    });
+                });
+            });
+        }
+
+        // Fullscreen Image Viewer
+        let fullscreenState = {
+            isOpen: false,
+            productIndex: 0,
+            imageIndex: 0,
+            allImages: []
+        };
+
+        function openFullscreen(src, productIndex, imageIndex) {
+            const overlay = document.getElementById('fullscreenOverlay');
+            const image = document.getElementById('fullscreenImage');
+            
+            fullscreenState.allImages = products[productIndex].images;
+            fullscreenState.productIndex = productIndex;
+            fullscreenState.imageIndex = imageIndex;
+            fullscreenState.isOpen = true;
+            
+            image.src = src;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFullscreen() {
+            const overlay = document.getElementById('fullscreenOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            fullscreenState.isOpen = false;
+        }
+
+        function navigateFullscreen(direction) {
+            if (!fullscreenState.isOpen) return;
+            
+            const image = document.getElementById('fullscreenImage');
+            const totalImages = fullscreenState.allImages.length;
+            
+            if (direction === 'next') {
+                fullscreenState.imageIndex = (fullscreenState.imageIndex + 1) % totalImages;
+            } else {
+                fullscreenState.imageIndex = (fullscreenState.imageIndex - 1 + totalImages) % totalImages;
+            }
+            
+            image.style.opacity = '0';
+            setTimeout(() => {
+                image.src = fullscreenState.allImages[fullscreenState.imageIndex];
+                image.style.opacity = '1';
+            }, 200);
+        }
+
+        function initFullscreen() {
+            const overlay = document.getElementById('fullscreenOverlay');
+            const closeBtn = document.getElementById('closeFullscreen');
+            const prevBtn = document.getElementById('fullscreenPrev');
+            const nextBtn = document.getElementById('fullscreenNext');
+            
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    closeFullscreen();
+                }
+            });
+            
+            closeBtn.addEventListener('click', closeFullscreen);
+            prevBtn.addEventListener('click', () => navigateFullscreen('prev'));
+            nextBtn.addEventListener('click', () => navigateFullscreen('next'));
+            
+            document.addEventListener('keydown', (e) => {
+                if (!fullscreenState.isOpen) return;
+                
+                if (e.key === 'Escape') {
+                    closeFullscreen();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateFullscreen('prev');
+                } else if (e.key === 'ArrowRight') {
+                    navigateFullscreen('next');
+                }
+            });
+        }
+
+        function initImageClickListeners() {
+            document.querySelectorAll('.product-image').forEach(img => {
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // FIXED: This now correctly gets the currently viewed image's index
+                    const src = img.src;
+                    const productIndex = parseInt(img.dataset.product);
+                    const imageIndex = parseInt(img.dataset.index);
+                    openFullscreen(src, productIndex, imageIndex);
+                });
+            });
+        }
+
+        // Menu functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('header');
+            const burgerMenu = document.getElementById('burgerMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const menuDimmer = document.getElementById('menuDimmer');
+            const logo = document.getElementById('logo');
+            const menuLinks = document.querySelectorAll('.menu-items a');
+
+            generateProducts();
+            initCarousels();
+            initFullscreen();
+            setTimeout(initImageClickListeners, 100);
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            header.addEventListener('mouseenter', () => {
+                header.classList.add('hover');
+            });
+
+            header.addEventListener('mouseleave', () => {
+                if (window.scrollY <= 50) {
+                    header.classList.remove('hover');
+                }
+            });
+
+            burgerMenu.addEventListener('click', () => {
+                const isOpen = menuOverlay.classList.contains('open');
+                if (isOpen) {
+                    menuOverlay.classList.remove('open');
+                    burgerMenu.classList.remove('menu-open');
+                    menuDimmer.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                } else {
+                    menuOverlay.classList.add('open');
+                    burgerMenu.classList.add('menu-open');
+                    menuDimmer.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+
+            menuDimmer.addEventListener('click', () => {
+                menuOverlay.classList.remove('open');
+                burgerMenu.classList.remove('menu-open');
+                menuDimmer.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const href = link.getAttribute('href');
+                    
+                    menuOverlay.classList.remove('open');
+                    burgerMenu.classList.remove('menu-open');
+                    menuDimmer.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    
+                    if (href === 'index.html' || href === 'about.html' || href === 'contact.html') {
+                        window.location.href = href;
+                    }
+                });
+            });
+
+            logo.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+
+            document.querySelectorAll('a, button, .contact-item, .video-card, .product-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    el.style.transform = 'scale(1.05)';
+                    el.style.transition = 'transform 0.3s ease';
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
