@@ -683,7 +683,11 @@
             window.addEventListener('scroll', () => {
                 const currentScrollY = window.scrollY;
                 
-                if (currentScrollY > 600) {
+                // MODIFIED: Lower threshold for mobile to trigger animation sooner
+                const isMobile = window.innerWidth <= 768;
+                const triggerThreshold = isMobile ? 200 : 600;
+                
+                if (currentScrollY > triggerThreshold) {
                     secondaryVideos.classList.add('visible');
                 } else {
                     secondaryVideos.classList.remove('visible');
