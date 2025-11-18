@@ -6,214 +6,631 @@
     <title>Felora Design | About</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --brand-color: #8b8b8b;
+            --transition: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
             font-family: 'Rubik', sans-serif;
-            background-color: #af7348; /* Set the background color */
+            background-color: #fff;
+            color: #000;
+            overflow-x: hidden;
         }
-        .navigation {
+
+        /* === HEADER STYLES (Same as Collection Page) === */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-            z-index: 1000;
+            height: 80px;
             display: flex;
-            justify-content: center; /* Center the navigation buttons */
-            align-items: center; /* Center items vertically */
-        }
-        .navigation a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: all 0.3s ease; /* Add a transition effect for smooth animation */
-        }
-        .navigation a:hover {
-            color: #af7348; /* Change the color on hovering */
-            transform: scale(1.1); /* Enlarge the button slightly on hovering */
-        }
-        .navigation a:active {
-            color: #ff5100; /* Change the color when the button is clicked (active) */
-        }
-        .logo-photo-container {
-            position: fixed;
-            top: 2px; /* Adjust the vertical position of the photo */
-            right: 20px; /* Adjust the horizontal position of the photo */
-            width: 40px; /* Adjust the width and height of the photo */
-            height: 40px;
-            background-image: url('images/Felora Design (Just the Emblem No Background).png');
-            background-size: cover;
-            background-position: center;
-            border-radius: 50%; /* Makes the photo circular */
-        }
-        .collection-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 40px;
+            padding: 0 40px;
+            z-index: 1000;
+            transition: all 0.4s var(--transition);
+            /* REMOVED: Hardcoded white background */
         }
-        .collection-item {
-            margin: 20px;
-            max-width: 300px;
+
+        .header.scrolled, .header.hover {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+        }
+
+        .burger-menu {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .burger-menu:hover {
+            transform: scale(1.05);
+        }
+
+        .burger-icon {
+            width: 24px;
+            height: 16px;
+            position: relative;
+            margin-right: 10px;
+        }
+
+        .burger-icon span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            /* CHANGED: White by default */
+            background-color: #fff;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled .burger-icon span,
+        .header.hover .burger-icon span,
+        .menu-open .burger-icon span {
+            /* CHANGED: Black when scrolled/hover */
+            background-color: #000;
+        }
+
+        .burger-icon span:nth-child(1) { top: 0; }
+        .burger-icon span:nth-child(2) { top: 7px; }
+        .burger-icon span:nth-child(3) { top: 14px; }
+
+        .menu-open .burger-icon span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 7px;
+        }
+
+        .menu-open .burger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-open .burger-icon span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 7px;
+        }
+
+        .menu-text {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            /* CHANGED: White by default */
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        .header.scrolled .menu-text,
+        .header.hover .menu-text,
+        .menu-open .menu-text {
+            /* CHANGED: Black when scrolled/hover */
+            color: #000;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.4s ease;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.4s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-light {
+            /* CHANGED: White logo by default (invert to white) */
+            filter: brightness(0) invert(1);
+        }
+
+        .header.scrolled .logo-light,
+        .header.hover .logo-light {
+            /* CHANGED: Black logo when scrolled/hover */
+            filter: brightness(0) invert(0);
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: -40%;
+            width: 40%;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            transition: left 0.6s var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .menu-dimmer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .menu-dimmer.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-overlay.open {
+            left: 0;
+        }
+
+        .menu-items {
+            list-style: none;
             text-align: center;
-            background-color: #fff; /* Add a white background color */
-            border-radius: 8px; /* Add rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-            transition: transform 0.2s ease; /* Add a smooth transition effect */
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease 0.3s;
         }
-        .collection-item:hover {
-            transform: translateY(-5px); /* Add a slight hover effect */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Make the photo pop on hover */
+
+        .menu-overlay.open .menu-items {
+            opacity: 1;
+            transform: translateX(0);
         }
-        .collection-item img {
-            display: block; /* Set the image to display as a block */
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px 8px 0 0; /* Rounded top corners */
-            margin-bottom: 0; /* Remove the bottom margin */
+
+        .menu-items li {
+            margin: 25px 0;
+            overflow: hidden;
+            padding: 0 20px;
         }
-        .collection-item-title {
-            padding: 10px;
-            font-size: 15px;
+
+        .menu-items a {
+            display: inline-block;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #000;
+            position: relative;
+            transition: all 0.4s var(--transition);
+            transform: translateY(100%);
+        }
+
+        .menu-items a:hover {
+            transform: scale(1.05);
+            color: var(--brand-color);
+        }
+
+        .menu-overlay.open .menu-items a {
+            transform: translateY(0);
+            transition-delay: calc(0.1s * var(--item-index));
+        }
+
+        .menu-items a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--brand-color);
+            transition: width 0.4s ease;
+        }
+
+        .menu-items a:hover::after {
+            width: 100%;
+        }
+
+        /* === ABOUT HERO === */
+        .about-hero {
+            position: relative;
+            width: 100%;
+            /* CHANGED: Reduced height to 90vh to show some content below */
+            height: 80vh;
+            background: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+    /* ---------------------------------- */
+    /* 👇 Use percentage for vertical adjustment 👇 */
+    /* ---------------------------------- */
+    object-position: center 70%; 
+    
+    opacity: 0.6;
+}
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 40px;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #666;
+        }
+
+        /* === ABOUT CONTENT === */
+        .about-content {
+            padding: 100px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .about-text strong {
+            color: #000;
             font-weight: 500;
         }
 
-        .home {
+        .about-text em {
+            font-style: italic;
+            color: var(--brand-color);
+        }
+
+        /* === ROTATING GALLERY SECTION === */
+        .rotating-gallery-section {
+            padding: 80px 40px;
+            background: #f8f8f8;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 1s var(--transition), transform 1s var(--transition);
+        }
+
+        .rotating-gallery-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .gallery-title {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #000;
+        }
+
+        .rotating-images {
             position: relative;
             width: 100%;
-            min-height: calc(10vh - 70px); /* Set minimum height to ensure content is visible below the navigation bar */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: white;
-            padding-top: 70px;
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .text {
-            font-size: 20px; /* Adjust the font size for mobile devices */
+        .rotating-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .rotating-image.active {
+            opacity: 1;
+        }
+
+        .gallery-caption {
             text-align: center;
-            position: relative;
-            background-color: #b18260;
-            padding: 10px;
-            overflow-y: auto; /* Make the text box scrollable */
-            max-height: 85vh; /* Set the maximum height of the text box to limit scrolling */
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 300;
+            color: #666;
+            letter-spacing: 0.5px;
         }
 
-        .photo_slider_info {
-            color: #fff;
-            font-size: 10px;
-            align-items: center;
-            position: relative;
-        }
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .menu-overlay {
+                width: 70%;
+                left: -70%;
+            }
 
-        /* Media query for mobile devices */
-        @media (max-width: 600px) {
-            .navigation {
-                flex-direction: row; /* Align navigation buttons horizontally */
-                justify-content: flex-start; /* Push buttons to the left */
+            .about-content {
+                padding: 100px 20px 60px;
             }
-            .navigation a {
-                margin: 5px 10px; /* Add some spacing between the buttons */
+
+            .about-text {
+                font-size: 16px;
             }
-            .logo-photo-container {
-                top: 10px;
-                right: 10px;
-                width: 30px;
-                height: 30px;
+
+            .hero-title {
+                font-size: 36px;
             }
-            .slogan {
-                font-size: 28px; /* Adjust the font size for mobile devices */
+
+            .hero-subtitle {
+                font-size: 16px;
             }
-            .photo-container {
-                top: -50px; /* Adjust the position for mobile devices */
-                margin: 0; /* Remove horizontal margin for mobile devices */
+
+            .gallery-title {
+                font-size: 28px;
+            }
+
+            .rotating-images {
+                max-width: 100%;
+            }
+
+            .menu-items a {
+                font-size: 28px;
+            }
+
+            .header {
+                padding: 0 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="navigation">
-        <a href="index.html">Home</a>
-        <a href="collection.html">Collection</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <div class="logo-photo-container"></div>
-    </div>
-
-    <div class="home" id="home">
-        <div class="text">
-            <h3> About Felora Design<br><br> </h3>
-
-
-            Felora Design stands proudly as an illustrious international fashion company with its headquarters based in the vibrant city of Tehran, Iran. Our exquisite services span across continents, catering to fashion enthusiasts worldwide. With dedicated service providers in countries such as United States, England, Canada, Australia, Germany, we keep striving to expand our operation in more countries in order to seamlessly connect cultures through the art of fashion.
-            <p></p>
-            At the heart of our extraordinary journey is the visionary and creative force behind Felora Design, none other than the esteemed Mrs. Felora Soleymanpour. With an unwavering passion for fashion and an exceptional talent in design, Mrs. Soleymanpour has been instrumental in shaping the brand's identity and global presence.
-            <p></p>
-            With an illustrious career spanning over four decades, Mrs. Soleymanpour's remarkable contributions to the fashion industry have left an indelible mark. From envisioning timeless collections to perfecting intricate designs, she has truly redefined elegance and sophistication in the world of haute couture.
-            <p></p>
-            About Mrs. Soleymanpour and her early experiences in the design world that go beyond her four decades as a professional designer, her journey in the designing career began during her high school years. The high school she attended had a uniform policy, but she was the only student exempted from wearing the standard uniform. Instead, she used the same fabric and color as other students to design a custom-made outfit for herself. This outfit was still identical to the school uniform but tailored to fit her preferences and showcased her unique style. The school principal approved this modification, making an exception for her to express her artistry through her uniform.
-            <p></p>
-            Felora Design proudly carries the legacy of Mrs. Soleymanpour's unparalleled dedication to craftsmanship and attention to detail. Her unique designs have adorned numerous satisfied clients, who have come to rely on her creations for a multitude of special occasions. From intimate wedding nights to glamorous galas, Felora Design has become synonymous with sophistication and opulence.
-            <p></p>
-            A testament to Mrs. Soleymanpour's artistic brilliance is the recent collaboration with the spectacular film "The Ritual" (in Persian: "مراسم ویژه"), which eloquently depicts the inspiring journey of Mr. Nelson Mandela in South Africa. This cinematic marvel features the radiant Mrs. Mahtab Keramati, a beacon of Persian talent, and is skillfully directed by the brilliant Mr. Meysam Shahbabaee.
-            <p></p>
-            As Felora Design continues to dazzle the fashion world, we honor and celebrate the extraordinary accomplishments of Mrs. Felora Soleymanpour. Her artistic vision and tireless efforts continue to elevate our brand to new heights, leaving an indelible impression on the hearts of our cherished clientele.
-            <p></p>
-            With an unwavering commitment to quality and creativity, Felora Design invites you to embark on a magnificent journey like no other. Join us as we continue to weave dreams into reality, empowering men and women with exquisite designs that capture the essence of beauty and allure. <p></p> <p></p>
-            <p></p>
-            <div class="photo_slider_info">
-            Photos of Mahtab Keramati on the scene of "The Ritual" 
-                </div>
-            <div class="photo-presenter"> 
-                <img src="images/photo_slide/IMG_2208.png" alt="Photo 1">
-                <img src="images/photo_slide/IMG_2213.png" alt="Photo 2">
-                <img src="images/photo_slide/IMG_2219.png" alt="Photo 3">
-                <img src="images/photo_slide/IMG_2225.png" alt="Photo 4">
+    <!-- Header -->
+    <!-- REMOVED: class="scrolled" from header -->
+    <header class="header" id="header">
+        <div class="burger-menu" id="burgerMenu">
+            <div class="burger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+            <span class="menu-text">Menu</span>
         </div>
-    </div>
-    <style>
-        /* Add the CSS styles for the centered and smaller photo presenter */
-        .photo-presenter {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 40px 0; /* Add some spacing between the About content and photo presenter */
-            height: 500px; /* Fixed height for the photo presenter container */
-            overflow: hidden; /* Hide any overflow to prevent vertical movement */
-        }
+        
+        <div class="logo-container">
+            <!-- ADDED: logo-light class -->
+            <img src="images-and-videos/logo.png" 
+                 alt="Felora Design Logo" 
+                 class="logo logo-light" 
+                 id="logo">
+        </div>
+    </header>
 
-        .photo-presenter img {
-            max-width: 100%;
-            max-height: 100%; /* Ensure the image retains its aspect ratio */
-            margin: 0 10px; /* Add some spacing between the photos */
-            display: none; /* Hide all photos initially */
-            object-fit: cover; /* Maintain aspect ratio while filling the container */
-        }
-    </style>
+    <!-- Menu Dimmer -->
+    <div class="menu-dimmer" id="menuDimmer"></div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+        <ul class="menu-items">
+            <li style="--item-index: 1;"><a href="index.html">Home</a></li>
+            <li style="--item-index: 2;"><a href="about.html">About</a></li>
+            <li style="--item-index: 3;"><a href="collection.html">Collection</a></li>
+            <li style="--item-index: 4;"><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <!-- FIXED: Use forward slashes in path -->
+        <img src="images-and-videos/about-bg.png" alt="About Felora Design" class="hero-image">
+        <div class="hero-content">
+            <h1 class="hero-title">ABOUT</h1>
+            <div class="hero-subtitle">Crafting Elegance Since 1981</div>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="about-text">
+            <strong>Felora Design</strong> stands proudly as an illustrious international fashion company with its headquarters based in the vibrant city of Tehran, Iran. Our exquisite services span across continents, catering to fashion enthusiasts worldwide. With dedicated service providers in countries such as United States, England, Canada, Australia, Germany, we keep striving to expand our operation in more countries in order to seamlessly connect cultures through the art of fashion.
+        </div>
+        
+        <div class="about-text">
+            At the heart of our extraordinary journey is the visionary and creative force behind Felora Design, none other than the esteemed <strong>Mrs. Felora Soleymanpour</strong>. With an unwavering passion for fashion and an exceptional talent in design, Mrs. Soleymanpour has been instrumental in shaping the brand's identity and global presence.
+        </div>
+        
+        <div class="about-text">
+            With an illustrious career spanning over four decades, Mrs. Soleymanpour's remarkable contributions to the fashion industry have left an indelible mark. From envisioning timeless collections to perfecting intricate designs, she has truly redefined elegance and sophistication in the world of haute couture.
+        </div>
+        
+        <div class="about-text">
+            About Mrs. Soleymanpour and her early experiences in the design world that go beyond her four decades as a professional designer, her journey in the designing career began during her high school years. The high school she attended had a uniform policy, but she was the only student exempted from wearing the standard uniform. Instead, she used the same fabric and color as other students to design a custom-made outfit for herself. This outfit was still identical to the school uniform but tailored to fit her preferences and showcased her unique style. The school principal approved this modification, making an exception for her to express her artistry through her uniform.
+        </div>
+        
+        <div class="about-text">
+            Felora Design proudly carries the legacy of Mrs. Soleymanpour's unparalleled dedication to craftsmanship and attention to detail. Her unique designs have adorned numerous satisfied clients, who have come to rely on her creations for a multitude of special occasions. From intimate wedding nights to glamorous galas, Felora Design has become synonymous with sophistication and opulence.
+        </div>
+        
+        <div class="about-text">
+            A testament to Mrs. Soleymanpour's artistic brilliance is the recent collaboration with the spectacular film <em>"The Ritual"</em> (in Persian: <em>"مراسم ویژه"</em>), which eloquently depicts the inspiring journey of Mr. Nelson Mandela in South Africa. This cinematic marvel features the radiant Mrs. Mahtab Keramati, a beacon of Persian talent, and is skillfully directed by the brilliant Mr. Meysam Shahbabaee.
+        </div>
+        
+        <div class="about-text">
+            As Felora Design continues to dazzle the fashion world, we honor and celebrate the extraordinary accomplishments of Mrs. Felora Soleymanpour. Her artistic vision and tireless efforts continue to elevate our brand to new heights, leaving an indelible impression on the hearts of our cherished clientele.
+        </div>
+        
+        <div class="about-text">
+            With an unwavering commitment to quality and creativity, Felora Design invites you to embark on a magnificent journey like no other. Join us as we continue to weave dreams into reality, empowering men and women with exquisite designs that capture the essence of beauty and allure.
+        </div>
+    </section>
+
+    <!-- Rotating Gallery Section -->
+    <section class="rotating-gallery-section" id="gallerySection">
+        <div class="gallery-container">
+            <h2 class="gallery-title">Photos of Mahtab Keramati on the scene of "The Ritual"</h1>
+            <div class="rotating-images" id="rotatingImages">
+                <!-- FIXED: Use forward slashes in paths -->
+                <img src="images-and-videos/the-ritual/compressed_IMG_2208.png" alt="Atelier" class="rotating-image active">
+                <img src="images-and-videos/the-ritual/compressed_IMG_2213.png" alt="Design Process" class="rotating-image">
+                <img src="images-and-videos/the-ritual/compressed_IMG_2219.png" alt="Fabric Selection" class="rotating-image">
+            <div class="gallery-caption">A glimpse into our creative process</div>
+        </div>
+    </section>
 
     <script>
-        // JavaScript code for photo presenter
-        document.addEventListener("DOMContentLoaded", function () {
-            const photos = document.querySelectorAll(".photo-presenter img");
-            let currentPhotoIndex = 0;
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('header');
+            const burgerMenu = document.getElementById('burgerMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const menuDimmer = document.getElementById('menuDimmer');
+            const logo = document.getElementById('logo');
+            const menuLinks = document.querySelectorAll('.menu-items a');
+            const gallerySection = document.getElementById('gallerySection');
+            const rotatingImages = document.querySelectorAll('.rotating-image');
 
-            function showNextPhoto() {
-                photos[currentPhotoIndex].style.display = "none";
-                currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
-                photos[currentPhotoIndex].style.display = "block";
+            // REMOVED: Hardcoded scrolled state
+            // header.classList.add('scrolled');
+
+            // Scroll reveal for gallery section
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gallerySection.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            observer.observe(gallerySection);
+
+            // Auto-rotating images every 5 seconds
+            let currentImageIndex = 0;
+            
+            function rotateImage() {
+                rotatingImages[currentImageIndex].classList.remove('active');
+                currentImageIndex = (currentImageIndex + 1) % rotatingImages.length;
+                rotatingImages[currentImageIndex].classList.add('active');
             }
 
-            // Initially show only the first photo
-            photos[currentPhotoIndex].style.display = "block";
+            // Start rotation
+            setInterval(rotateImage, 5000);
 
-            setInterval(showNextPhoto, 4000); // Show each photo for 4 seconds
+            // Menu toggle
+            burgerMenu.addEventListener('click', () => {
+                const isOpen = menuOverlay.classList.contains('open');
+                if (isOpen) {
+                    menuOverlay.classList.remove('open');
+                    burgerMenu.classList.remove('menu-open');
+                    menuDimmer.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                } else {
+                    menuOverlay.classList.add('open');
+                    burgerMenu.classList.add('menu-open');
+                    menuDimmer.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+
+            menuDimmer.addEventListener('click', () => {
+                menuOverlay.classList.remove('open');
+                burgerMenu.classList.remove('menu-open');
+                menuDimmer.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // ADDED: Scroll effect for header (same as collection page)
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // ADDED: Hover effect for header (same as collection page)
+            header.addEventListener('mouseenter', () => {
+                header.classList.add('hover');
+            });
+
+            header.addEventListener('mouseleave', () => {
+                if (window.scrollY <= 50) {
+                    header.classList.remove('hover');
+                }
+            });
+
+            // Navigation
+            menuLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href === '#') { e.preventDefault(); return; }
+                    if (href.startsWith('index.html#')) return; // Allow anchor links
+                    
+                    menuOverlay.classList.remove('open');
+                    burgerMenu.classList.remove('menu-open');
+                    menuDimmer.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    
+                    if (href === 'collection.html') {
+                        window.location.href = href;
+                    }
+                });
+            });
+
+            logo.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+
+            // Magnifying hover effect
+            document.querySelectorAll('a, button, .value-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    el.style.transform = 'scale(1.05)';
+                    el.style.transition = 'transform 0.3s ease';
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'scale(1)';
+                });
+            });
         });
     </script>
 </body>
