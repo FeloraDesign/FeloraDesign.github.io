@@ -1,196 +1,606 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felora Design | Contact</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Add the CSS styles for navigation, logo, and background */
+        :root {
+            --brand-color: #8b8b8b;
+            --transition: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
             font-family: 'Rubik', sans-serif;
-            overflow: hidden; /* Prevent scrolling */
-            background-color: #af7348; /* Set the background color */
+            background-color: #fff;
+            color: #000;
+            overflow-x: hidden;
         }
-        .navigation {
+
+        /* === HEADER STYLES === */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
             z-index: 1000;
-            display: flex;
-            justify-content: center; /* Center the navigation buttons */
-            align-items: center; /* Center items vertically */
-        }
-        .navigation a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: all 0.3s ease; /* Add a transition effect for smooth animation */
-        }
-        .navigation a:hover {
-            color: #af7348; /* Change the color on hovering */
-            transform: scale(1.1); /* Enlarge the button slightly on hovering */
-        }
-        .navigation a:active {
-            color: #ff5100; /* Change the color when the button is clicked (active) */
-        }
-        .logo-photo-container {
-            position: fixed;
-            top: 2px; /* Adjust the vertical position of the photo */
-            right: 20px; /* Adjust the horizontal position of the photo */
-            width: 40px; /* Adjust the width and height of the photo */
-            height: 40px;
-            background-image: url('images/Felora Design (Just the Emblem No Background).png');
-            background-size: cover;
-            background-position: center;
-            border-radius: 50%; /* Makes the photo circular */
+            transition: all 0.4s var(--transition);
         }
 
-        .contact {
-            top: 15px; /* Adjust the vertical position of the photo */
-            width: 100%;
-            height: 25vh;
-            position: relative;
-            z-index: 1;
+        .header.scrolled, .header.hover {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+        }
+
+        .burger-menu {
             display: flex;
-            justify-content: center;
             align-items: center;
-            flex-direction: column;
-            color: white;
-            padding-top: 50px;
-        }
-
-        .contact-text {
-            max-width: 80%;
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 0px;
-        }
-
-        .contact-icons-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .email-photo-container,
-        .instagram-photo-container {
-            margin: 0 10px;
-            /* Add spacing between the icons */
-        }
-
-        .email-photo,
-        .instagram-photo {
-            width: 100px;
-            height: 100px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 50%;
             cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .burger-menu:hover {
+            transform: scale(1.05);
+        }
+
+        .burger-icon {
+            width: 24px;
+            height: 16px;
+            position: relative;
+            margin-right: 10px;
+        }
+
+        .burger-icon span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            position: absolute;
             transition: all 0.3s ease;
-            /* Add a transition effect for smooth animation */
         }
 
-        .email-photo {
-            background-image: url('images/website_buttons/Email.png');
-            /* Replace 'images/email-icon.png' with the path to your photo */
+        .header.scrolled .burger-icon span,
+        .header.hover .burger-icon span,
+        .menu-open .burger-icon span {
+            background-color: #000;
         }
 
-        .instagram-photo {
-            background-image: url('images/website_buttons/Instagram.png');
-            /* Replace 'images/instagram-icon.png' with the path to your Instagram icon */
+        .burger-icon span:nth-child(1) { top: 0; }
+        .burger-icon span:nth-child(2) { top: 7px; }
+        .burger-icon span:nth-child(3) { top: 14px; }
+
+        .menu-open .burger-icon span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 7px;
         }
 
-        .email-photo:hover,
-        .instagram-photo:hover {
-            transform: scale(1.2);
-            /* Enlarge the icons on hovering */
+        .menu-open .burger-icon span:nth-child(2) {
+            opacity: 0;
         }
 
-        /* Add the CSS for the video background */
-        #video-background {
+        .menu-open .burger-icon span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 7px;
+        }
+
+        .menu-text {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        .header.scrolled .menu-text,
+        .header.hover .menu-text,
+        .menu-open .menu-text {
+            color: #000;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.4s ease;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.4s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-light {
+            filter: brightness(0) invert(1);
+        }
+
+        .header.scrolled .logo-light,
+        .header.hover .logo-light {
+            filter: brightness(0) invert(0);
+        }
+
+        .menu-overlay {
             position: fixed;
+            top: 0;
+            left: -40%;
+            width: 40%;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            transition: left 0.6s var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .menu-dimmer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .menu-dimmer.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-overlay.open {
+            left: 0;
+        }
+
+        .menu-items {
+            list-style: none;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease 0.3s;
+        }
+
+        .menu-overlay.open .menu-items {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .menu-items li {
+            margin: 25px 0;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        .menu-items a {
+            display: inline-block;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #000;
+            position: relative;
+            transition: all 0.4s var(--transition);
+            transform: translateY(100%);
+        }
+
+        .menu-items a:hover {
+            transform: scale(1.05);
+            color: var(--brand-color);
+        }
+
+        .menu-overlay.open .menu-items a {
+            transform: translateY(0);
+            transition-delay: calc(0.1s * var(--item-index));
+        }
+
+        .menu-items a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--brand-color);
+            transition: width 0.4s ease;
+        }
+
+        .menu-items a:hover::after {
+            width: 100%;
+        }
+
+        /* === CONTACT HERO === */
+        .contact-hero {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            background: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            z-index: -10;
-            margin-top: 130px;
-            /* Adjust the margin-top value to create an offset */
+            background-image: url('images-and-videos/contact-bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
         }
 
-        /* Media query for mobile devices */
-        @media (max-width: 600px) {
-            .navigation {
-                flex-direction: row; /* Align navigation buttons horizontally */
-                justify-content: flex-start; /* Push buttons to the left */
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 40px;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #666;
+        }
+
+        /* === CONTACT CONTENT === */
+        .contact-content {
+            padding: 100px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-text {
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 60px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.4s var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            background-color: var(--brand-color);
+            transform: scale(1.1);
+        }
+
+        .contact-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: #666;
+            transition: fill 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon svg {
+            fill: #fff;
+        }
+
+        .contact-label {
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .contact-value {
+            font-size: 16px;
+            font-weight: 400;
+            color: #000;
+            letter-spacing: 0.5px;
+        }
+
+        /* === ADDITIONAL INFO === */
+        .additional-info {
+            padding: 80px 40px;
+            background: #f8f8f8;
+            text-align: center;
+        }
+
+        .info-title {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: #000;
+        }
+
+        .info-text {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .menu-overlay {
+                width: 70%;
+                left: -70%;
             }
-            .navigation a {
-                margin: 5px 10px; /* Add some spacing between the buttons */
+
+            .contact-content {
+                padding: 80px 20px;
             }
-            .logo-photo-container {
-                top: 10px;
-                right: 10px;
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .contact-text {
+                font-size: 16px;
+                margin-bottom: 40px;
+            }
+
+            .contact-links {
+                gap: 40px;
+            }
+
+            .contact-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .contact-icon svg {
                 width: 30px;
                 height: 30px;
             }
-            .slogan {
-                font-size: 28px; /* Adjust the font size for mobile devices */
+
+            .menu-items a {
+                font-size: 28px;
             }
-            .photo-container {
-                top: -50px; /* Adjust the position for mobile devices */
-                margin: 0; /* Remove horizontal margin for mobile devices */
+
+            .header {
+                padding: 0 20px;
+            }
+
+            .additional-info {
+                padding: 60px 20px;
             }
         }
     </style>
 </head>
-
 <body>
-    <div class="navigation">
-        <a href="index.html">Home</a>
-        <a href="collection.html">Collection</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <div class="logo-photo-container"></div>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="burger-menu" id="burgerMenu">
+            <div class="burger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <span class="menu-text">Menu</span>
+        </div>
+        
+        <div class="logo-container">
+            <img src="images-and-videos/logo.png" 
+                 alt="Felora Design Logo" 
+                 class="logo logo-light" 
+                 id="logo">
+        </div>
+    </header>
+
+    <!-- Menu Dimmer -->
+    <div class="menu-dimmer" id="menuDimmer"></div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+        <ul class="menu-items">
+            <li style="--item-index: 1;"><a href="index.html">Home</a></li>
+            <li style="--item-index: 2;"><a href="about.html">About</a></li>
+            <li style="--item-index: 3;"><a href="collection.html">Collection</a></li>
+            <li style="--item-index: 4;"><a href="contact.html">Contact</a></li>
+        </ul>
     </div>
 
-    <!-- Include the looping video background (replace 'video-file.mp4' with your video file) -->
-    <video autoplay loop muted id="video-background">
-        <source src="images/bg_vid.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Contact</h1>
+            <div class="hero-subtitle">Let's Create Something Beautiful Together</div>
+        </div>
+    </section>
 
-    <div class="contact" id="contact">
+    <!-- Contact Content -->
+    <section class="contact-content">
         <div class="contact-text">
-            For any inquiries or questions, please feel free to contact us:
-            <!--            <p>FeloraDesign@outlook.com</p> -->
+            Ready to purchase or explore bespoke options? We handle all orders and inquiries directly with our customers. Contact us today for personalized assistance with making a purchase, discussing customizations, or any questions you may have.
         </div>
-        <div class="contact-icons-container">
-            <!-- Email Icon -->
-            <div class="email-photo-container">
-                <a href="mailto:Info@FeloraDesign.com">
-                    <div class="email-photo"></div>
-                </a>
-            </div>
+        
+        <div class="contact-links">
+            <a href="mailto:Info@FeloraDesign.com" class="contact-item">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </div>
+                <div class="contact-label">Email</div>
+                <div class="contact-value">Info@FeloraDesign.com</div>
+            </a>
+            
+            <a href="https://www.instagram.com/felora_design/?hl=en" target="_blank" class="contact-item">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                    </svg>
+                </div>
+                <div class="contact-label">Instagram</div>
+                <div class="contact-value">@felora_design</div>
+            </a>
+        </div>
+    </section>
 
-            <!-- Instagram Icon -->
-            <div class="instagram-photo-container">
-                <a href="https://www.instagram.com/felora_design/?hl=en">
-                    <div class="instagram-photo"></div>
-                </a>
-            </div>
+    <!-- Additional Info -->
+    <section class="additional-info">
+        <h2 class="info-title">Our Commitment</h2>
+        <div class="info-text">
+            We proudly serve clients worldwide with dedicated service providers in United States, England, Canada, Australia, and Germany. Our team is committed to providing personalized attention to every inquiry.
         </div>
-    </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('header');
+            const burgerMenu = document.getElementById('burgerMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const menuDimmer = document.getElementById('menuDimmer');
+            const logo = document.getElementById('logo');
+            const menuLinks = document.querySelectorAll('.menu-items a');
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Header hover effect
+            header.addEventListener('mouseenter', () => {
+                header.classList.add('hover');
+            });
+
+            header.addEventListener('mouseleave', () => {
+                if (window.scrollY <= 50) {
+                    header.classList.remove('hover');
+                }
+            });
+
+            // Menu toggle
+            burgerMenu.addEventListener('click', () => {
+                const isOpen = menuOverlay.classList.contains('open');
+                if (isOpen) {
+                    menuOverlay.classList.remove('open');
+                    burgerMenu.classList.remove('menu-open');
+                    menuDimmer.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                } else {
+                    menuOverlay.classList.add('open');
+                    burgerMenu.classList.add('menu-open');
+                    menuDimmer.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+
+            menuDimmer.addEventListener('click', () => {
+                menuOverlay.classList.remove('open');
+                burgerMenu.classList.remove('menu-open');
+                menuDimmer.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Navigation
+            menuLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href === '#') { e.preventDefault(); return; }
+                    
+                    menuOverlay.classList.remove('open');
+                    burgerMenu.classList.remove('menu-open');
+                    menuDimmer.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    
+                    if (href === 'index.html' || href === 'about.html' || href === 'collection.html') {
+                        window.location.href = href;
+                    }
+                });
+            });
+
+            logo.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+
+            // Hover effect for contact items
+            document.querySelectorAll('.contact-item').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    el.style.transform = 'translateY(-5px) scale(1.02)';
+                    el.style.transition = 'transform 0.4s var(--transition)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
 </body>
-
 </html>
