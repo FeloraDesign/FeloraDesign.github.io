@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* === HEADER STYLES (Same as Collection Page) === */
+        /* === HEADER STYLES === */
         .header {
             position: fixed;
             top: 0;
@@ -39,7 +39,6 @@
             padding: 0 40px;
             z-index: 1000;
             transition: all 0.4s var(--transition);
-            /* REMOVED: Hardcoded white background */
         }
 
         .header.scrolled, .header.hover {
@@ -70,7 +69,6 @@
             display: block;
             width: 100%;
             height: 2px;
-            /* CHANGED: White by default */
             background-color: #fff;
             position: absolute;
             transition: all 0.3s ease;
@@ -79,7 +77,6 @@
         .header.scrolled .burger-icon span,
         .header.hover .burger-icon span,
         .menu-open .burger-icon span {
-            /* CHANGED: Black when scrolled/hover */
             background-color: #000;
         }
 
@@ -105,7 +102,6 @@
             font-size: 12px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            /* CHANGED: White by default */
             color: #fff;
             transition: color 0.3s ease;
         }
@@ -113,7 +109,6 @@
         .header.scrolled .menu-text,
         .header.hover .menu-text,
         .menu-open .menu-text {
-            /* CHANGED: Black when scrolled/hover */
             color: #000;
         }
 
@@ -122,6 +117,18 @@
             left: 50%;
             transform: translateX(-50%);
             transition: all 0.4s ease;
+        }
+
+        /* NEW: Initially hidden state for About page */
+        .logo-container.initially-hidden {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-100%);
+        }
+
+        /* NEW: Slide-down animation */
+        .logo-container.slide-down {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         .logo {
@@ -136,13 +143,11 @@
         }
 
         .logo-light {
-            /* CHANGED: White logo by default (invert to white) */
             filter: brightness(0) invert(1);
         }
 
         .header.scrolled .logo-light,
         .header.hover .logo-light {
-            /* CHANGED: Black logo when scrolled/hover */
             filter: brightness(0) invert(0);
         }
 
@@ -241,13 +246,11 @@
             width: 100%;
         }
 
-        /* === ABOUT HERO === */
+        /* === ABOUT HERO WITH VIDEO === */
         .about-hero {
             position: relative;
             width: 100%;
-            /* CHANGED: Reduced height to 90vh to show some content below */
             height: 80vh;
-            background: #f8f8f8;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -255,25 +258,39 @@
             overflow: hidden;
         }
 
-.hero-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    
-    /* ---------------------------------- */
-    /* 👇 Use percentage for vertical adjustment 👇 */
-    /* ---------------------------------- */
-    object-position: center 70%; 
-    
-    opacity: 0.6;
-}
+        /* NEW: Video container matching index page dimensions */
+        .hero-video-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 1905px;
+            margin: 0 auto;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             max-width: 800px;
             padding: 0 40px;
         }
@@ -428,7 +445,6 @@
 </head>
 <body>
     <!-- Header -->
-    <!-- REMOVED: class="scrolled" from header -->
     <header class="header" id="header">
         <div class="burger-menu" id="burgerMenu">
             <div class="burger-icon">
@@ -439,8 +455,7 @@
             <span class="menu-text">Menu</span>
         </div>
         
-        <div class="logo-container">
-            <!-- ADDED: logo-light class -->
+        <div class="logo-container initially-hidden" id="logoContainer">
             <img src="web-content/logo.png" 
                  alt="Felora Design Logo" 
                  class="logo logo-light" 
@@ -461,10 +476,14 @@
         </ul>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Video -->
     <section class="about-hero">
-        <!-- FIXED: Use forward slashes in path -->
-        <img src="web-content/about-bg.png" alt="About Felora Design" class="hero-image">
+        <div class="hero-video-wrapper">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="web-content/looping-bg.mov" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
         <div class="hero-content">
             <h1 class="hero-title">ABOUT</h1>
             <div class="hero-subtitle">Crafting Elegance Since 1981</div>
@@ -511,7 +530,6 @@
         <div class="gallery-container">
             <h2 class="gallery-title">Photos of Mahtab Keramati on the scene of "The Ritual"</h1>
             <div class="rotating-images" id="rotatingImages">
-                <!-- FIXED: Use forward slashes in paths -->
                 <img src="web-content/the-ritual/compressed_IMG_2208.png" alt="Atelier" class="rotating-image active">
                 <img src="web-content/the-ritual/compressed_IMG_2213.png" alt="Design Process" class="rotating-image">
                 <img src="web-content/the-ritual/compressed_IMG_2219.png" alt="Fabric Selection" class="rotating-image">
@@ -526,12 +544,10 @@
             const menuOverlay = document.getElementById('menuOverlay');
             const menuDimmer = document.getElementById('menuDimmer');
             const logo = document.getElementById('logo');
+            const logoContainer = document.getElementById('logoContainer');
             const menuLinks = document.querySelectorAll('.menu-items a');
             const gallerySection = document.getElementById('gallerySection');
             const rotatingImages = document.querySelectorAll('.rotating-image');
-
-            // REMOVED: Hardcoded scrolled state
-            // header.classList.add('scrolled');
 
             // Scroll reveal for gallery section
             const observer = new IntersectionObserver((entries) => {
@@ -579,16 +595,18 @@
                 document.body.style.overflow = 'auto';
             });
 
-            // ADDED: Scroll effect for header (same as collection page)
+            // NEW: Scroll effect for logo slide-down animation
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
                     header.classList.add('scrolled');
+                    logoContainer.classList.add('slide-down');
                 } else {
                     header.classList.remove('scrolled');
+                    logoContainer.classList.remove('slide-down');
                 }
             });
 
-            // ADDED: Hover effect for header (same as collection page)
+            // Hover effect for header
             header.addEventListener('mouseenter', () => {
                 header.classList.add('hover');
             });
@@ -604,7 +622,7 @@
                 link.addEventListener('click', (e) => {
                     const href = link.getAttribute('href');
                     if (href === '#') { e.preventDefault(); return; }
-                    if (href.startsWith('index.html#')) return; // Allow anchor links
+                    if (href.startsWith('index.html#')) return;
                     
                     menuOverlay.classList.remove('open');
                     burgerMenu.classList.remove('menu-open');
