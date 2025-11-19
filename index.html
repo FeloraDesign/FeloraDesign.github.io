@@ -243,7 +243,7 @@
             width: 100%;
         }
 
-        /* 16:9 Video Container */
+        /* 16:9 Video Container - Desktop */
         .video-hero-container {
             position: relative;
             width: 100%;
@@ -461,6 +461,18 @@
             .video-card {
                 max-width: 400px;
                 margin: 0 auto;
+            }
+
+            /* NEW: Mobile video hero - Full viewport height with center crop */
+            .video-hero-container {
+                padding-bottom: 0; /* Remove aspect ratio padding */
+                height: 100vh; /* Full viewport height */
+                max-width: none; /* Remove max-width constraint */
+            }
+
+            .background-video {
+                object-fit: cover; /* This will crop the video to fill the space */
+                object-position: center center; /* Center the crop */
             }
         }
     </style>
