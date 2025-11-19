@@ -234,7 +234,7 @@
             width: 100%;
         }
 
-        /* === HERO SECTION === */
+        /* === HERO SECTION - FIXED FOR ULTRA-WIDE DISPLAYS === */
         .collection-hero {
             position: relative;
             width: 100%;
@@ -252,11 +252,14 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0; /* ADDED */
+            bottom: 0; /* ADDED */
+            /* REMOVED width: 100%; */
+            /* REMOVED height: 100%; */
             background-image: url('web-content/collection-bg.png');
             background-size: cover;
-            background-position: center;
+            background-position: center center; /* EXPLICIT CENTERING */
+            background-repeat: no-repeat; /* PREVENT TILING */
             opacity: 0.7;
         }
 
@@ -697,7 +700,7 @@
             },
             {
                 name: "Shadow Crest",
-                price: "$1,600",
+                price: "$1,450",
                 images: [
                     "web-content/collection/2025-spring-collection/1.png",
                     "web-content/collection/2025-spring-collection/2.png"
@@ -716,7 +719,7 @@
                 name: "Desert Phantom",
                 price: "$1,200",
                 images: [
-                    "web-content/collection/2025-spring-collection/5.png",
+                    "web-content/collection/2025-spring-collection/5.png",                    
                     "web-content/collection/2025-spring-collection/6.png"
                 ]
             },
