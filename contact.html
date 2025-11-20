@@ -255,7 +255,8 @@
             bottom: 0; /* ADDED */
             /* REMOVED width: 100%; */
             /* REMOVED height: 100%; */
-            background-image: url('web-content/contact-bg.png');
+            /* Darkening overlay layer. Change the '0.4' value for different darkness levels. */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('web-content/contact-bg.png');
             background-size: cover;
             background-position: center center; /* EXPLICIT CENTERING */
             background-repeat: no-repeat; /* PREVENT TILING */
