@@ -252,14 +252,12 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0; /* ADDED */
-            bottom: 0; /* ADDED */
-            /* REMOVED width: 100%; */
-            /* REMOVED height: 100%; */
+            right: 0;
+            bottom: 0;
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('web-content/collection-bg.jpg');
             background-size: cover;
-            background-position: center center; /* EXPLICIT CENTERING */
-            background-repeat: no-repeat; /* PREVENT TILING */
+            background-position: center center;
+            background-repeat: no-repeat;
             opacity: 0.9;
         }
 
@@ -315,6 +313,7 @@
             padding-bottom: 125%;
             overflow: hidden;
             background: #f5f5f5;
+            touch-action: pan-y; /* Allows normal vertical scrolling while catching horizontal swipes */
         }
 
         .product-image {
@@ -327,13 +326,11 @@
             opacity: 0;
             transition: opacity 0.6s ease;
             cursor: zoom-in;
-            /* FIXED: Disable clicks on hidden images */
             pointer-events: none;
         }
 
         .product-image.active {
             opacity: 1;
-            /* FIXED: Enable clicks only on visible image */
             pointer-events: auto;
         }
 
@@ -437,6 +434,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: pan-y;
         }
 
         .fullscreen-overlay.active {
@@ -450,6 +448,8 @@
             object-fit: contain;
             cursor: zoom-out;
             transition: opacity 0.3s ease;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         /* Fullscreen Close Button */
@@ -563,7 +563,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header" id="header">
         <div class="burger-menu" id="burgerMenu">
             <div class="burger-icon">
@@ -582,10 +581,8 @@
         </div>
     </header>
 
-    <!-- Menu Dimmer -->
     <div class="menu-dimmer" id="menuDimmer"></div>
 
-    <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
         <ul class="menu-items">
             <li style="--item-index: 1;"><a href="index.html">Home</a></li>
@@ -595,7 +592,6 @@
         </ul>
     </div>
 
-    <!-- Hero Section -->
     <section class="collection-hero">
         <div class="hero-background"></div>
         <div class="hero-content">
@@ -606,14 +602,11 @@
         </div>
     </section>
 
-    <!-- Collection Section -->
     <section class="collection-section">
         <div class="collection-grid" id="collectionGrid">
-            <!-- Products will be dynamically generated here -->
-        </div>
+            </div>
     </section>
 
-    <!-- Fullscreen Image Viewer -->
     <div class="fullscreen-overlay" id="fullscreenOverlay">
         <div class="close-fullscreen" id="closeFullscreen">
             <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -635,15 +628,7 @@
     </div>
 
     <script>
-        // Product data with multiple images per product
-        // ============================================
-        // LOCAL DEVELOPMENT: Use relative paths with forward slashes
-        // GITHUB PAGES: Uncomment and adjust paths as needed
-        
         const products = [
-
-
-
             {
                 name: "Obsidian Ripple",
                 price: "$345",
@@ -790,8 +775,6 @@
                     "web-content/collection/2026/r-1.jpg"
                 ]
             },
-
-            
             {
                 name: "Alabaster Bloom",
                 price: "$1,280",
@@ -800,7 +783,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_165901_357.jpeg"
                 ]
             },
-
             {
                 name: "Alabaster Silk Petal",
                 price: "$1,280",
@@ -811,7 +793,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_170344_896.jpeg"
                 ]
             },
-
             {
                 name: "Midnight Garland",
                 price: "$1,280",
@@ -821,7 +802,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_170418_038.jpeg"
                 ]
             },
-
             {
                 name: "Midnight Wildwood",
                 price: "$1,280",
@@ -832,7 +812,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_170502_981.jpeg"
                 ]
             },
-
             {
                 name: "Midnight Velvet",
                 price: "$1,280",
@@ -841,7 +820,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_170521_919.jpeg"
                 ]
             },
-
             {
                 name: "Obsidian Rose Bridal",
                 price: "$1,280",
@@ -853,7 +831,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_170635_130.jpeg"
                 ]
             },
-
             {
                 name: "Velvet Cinched Mantle",
                 price: "$1,280",
@@ -868,7 +845,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_170652_262.jpeg" 
                 ]
             },
-
             {
                 name: "Onyx Shard Velvet",
                 price: "$1,280",
@@ -879,7 +855,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_171314_024.jpeg"
                 ]
             },
-
             {
                 name: "Obsidian Silk Wrap",
                 price: "$1,280",
@@ -889,7 +864,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_171339_369.jpeg"
                 ]
             },
-
             {
                 name: "Kaleidoscope Orb Velvet",
                 price: "$1,280",
@@ -899,7 +873,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_171509_792.jpeg"
                 ]
             },
-
             {
                 name: "Ruby Lattice Velvet",
                 price: "$1,280",
@@ -909,7 +882,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_171605_855.jpeg"
                 ]
             },
-
             {
                 name: "Royal Azure Velvet",
                 price: "$1,280",
@@ -919,7 +891,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_171639_958.jpeg"
                 ]
             },
-
             {
                 name: "Imperial Sand Velvet",
                 price: "$1,280",
@@ -930,7 +901,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_171800_118.jpeg"
                 ]
             },
-
             {
                 name: "Forest Wine Velvet",
                 price: "$1,280",
@@ -941,7 +911,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_171816_148.jpeg"
                 ]
             },
-
             {
                 name: "Monochrome Frost Bodice",
                 price: "$1,280",
@@ -950,7 +919,6 @@
                     "web-content/collection/december-2025-collection/compressed_IMG_20251230_171905_854.jpeg"
                 ]
             },
-
             {
                 name: "The Midnight Ruby",
                 price: "$1,250",
@@ -999,7 +967,6 @@
                     "web-content/collection/2025-fall-collection/compressed_6-2.jpeg"
                 ]
             },
-
             {
                 name: "Caramel Duster",
                 price: "$1,850",
@@ -1024,7 +991,6 @@
                     "web-content/collection/2025-spring-collection/4.jpeg"
                 ]
             },
-
             {
                 name: "Desert Phantom",
                 price: "$1,200",
@@ -1065,7 +1031,6 @@
                     "web-content/collection/2025-spring-collection/14.jpeg"
                 ]
             },
-
             {
                 name: "Midnight Mantle",
                 price: "$1,200",
@@ -1106,7 +1071,6 @@
                     "web-content/collection/2025-spring-collection/23.jpeg"
                 ]
             },
-
             {
                 name: "Celestial Flow",
                 price: "$1,200",
@@ -1151,7 +1115,6 @@
                     "web-content/collection/2025-spring-collection/38.jpeg"
                 ]
             },
-
             {
                 name: "Crossfade Silk",
                 price: "$1,200",
@@ -1196,7 +1159,6 @@
                     "web-content/collection/marine-theme/4.jpeg"
                 ]
             },
-
             {
                 name: "Blush Denim",
                 price: "$1,200",
@@ -1240,7 +1202,6 @@
                     "web-content/collection/marine-theme/15.jpeg"
                 ]
             },
-
             {
                 name: "Heritage Grid Vest",
                 price: "$1,200",
@@ -1282,7 +1243,6 @@
                     "web-content/collection/summer-collection/9.jpeg"
                 ]
             },
-
             {
                 name: "Seaside Breeze",
                 price: "$1,200",
@@ -1323,7 +1283,6 @@
                     "web-content/collection/summer-collection/17.jpeg"
                 ]
             },
-
             {
                 name: "Midnight Rose Gold Elegance",
                 price: "$1,200",
@@ -1369,7 +1328,6 @@
                     "web-content/collection/summer-collection/32.jpeg"
                 ]
             },
-
             {
                 name: "Midnight Echo",
                 price: "$1,200",
@@ -1423,7 +1381,6 @@
                     "web-content/collection/fall-collection/12.jpeg"
                 ]
             },
-
             {
                 name: "Monochrome Majesty",
                 price: "$1,200",
@@ -1451,8 +1408,6 @@
                     "web-content/collection/fall-collection/21.jpeg"                    
                 ]
             }            
-
-            
         ];
 
         // Generate product cards
@@ -1462,7 +1417,7 @@
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
-                    <div class="product-image-container">
+                    <div class="product-image-container" data-product="${index}">
                         ${product.images.map((img, i) => 
                             `<img src="${img}" alt="${product.name}" class="product-image ${i === 0 ? 'active' : ''}" data-product="${index}" data-index="${i}">`
                         ).join('')}
@@ -1502,26 +1457,30 @@
                     dots: document.querySelectorAll(`.dot[data-product="${productIndex}"]`)
                 };
 
+                const switchImage = (direction) => {
+                    const carousel = carousels[productIndex];
+                    if (carousel.images.length <= 1) return;
+
+                    carousel.images[carousel.currentIndex].classList.remove('active');
+                    carousel.dots[carousel.currentIndex].classList.remove('active');
+                    
+                    if (direction === 'next') {
+                        carousel.currentIndex = (carousel.currentIndex + 1) % carousel.images.length;
+                    } else {
+                        carousel.currentIndex = (carousel.currentIndex - 1 + carousel.images.length) % carousel.images.length;
+                    }
+                    
+                    setTimeout(() => {
+                        carousel.images[carousel.currentIndex].classList.add('active');
+                        carousel.dots[carousel.currentIndex].classList.add('active');
+                    }, 50);
+                };
+
                 // Arrow navigation
                 document.querySelectorAll(`.nav-arrow[data-product="${productIndex}"]`).forEach(arrow => {
                     arrow.addEventListener('click', (e) => {
                         e.stopPropagation();
-                        const direction = arrow.dataset.direction;
-                        const carousel = carousels[productIndex];
-                        
-                        carousel.images[carousel.currentIndex].classList.remove('active');
-                        carousel.dots[carousel.currentIndex].classList.remove('active');
-                        
-                        if (direction === 'next') {
-                            carousel.currentIndex = (carousel.currentIndex + 1) % carousel.images.length;
-                        } else {
-                            carousel.currentIndex = (carousel.currentIndex - 1 + carousel.images.length) % carousel.images.length;
-                        }
-                        
-                        setTimeout(() => {
-                            carousel.images[carousel.currentIndex].classList.add('active');
-                            carousel.dots[carousel.currentIndex].classList.add('active');
-                        }, 50);
+                        switchImage(arrow.dataset.direction);
                     });
                 });
 
@@ -1545,6 +1504,37 @@
                         }, 50);
                     });
                 });
+
+                // Mobile Swipe navigation for product cards
+                const container = document.querySelector(`.product-image-container[data-product="${productIndex}"]`);
+                if (container) {
+                    let touchStartX = 0;
+                    let touchStartY = 0;
+                    let touchEndX = 0;
+                    let touchEndY = 0;
+
+                    container.addEventListener('touchstart', (e) => {
+                        touchStartX = e.changedTouches[0].screenX;
+                        touchStartY = e.changedTouches[0].screenY;
+                    }, { passive: true });
+
+                    container.addEventListener('touchend', (e) => {
+                        touchEndX = e.changedTouches[0].screenX;
+                        touchEndY = e.changedTouches[0].screenY;
+                        
+                        const diffX = touchEndX - touchStartX;
+                        const diffY = touchEndY - touchStartY;
+
+                        // Ensure horizontal gesture intent (longer X movement than Y)
+                        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+                            if (diffX < 0) {
+                                switchImage('next');
+                            } else {
+                                switchImage('prev');
+                            }
+                        }
+                    }, { passive: true });
+                }
             });
         }
 
@@ -1623,13 +1613,41 @@
                     navigateFullscreen('next');
                 }
             });
+
+            // Mobile Swipe navigation for fullscreen mode
+            let fsTouchStartX = 0;
+            let fsTouchStartY = 0;
+            let fsTouchEndX = 0;
+            let fsTouchEndY = 0;
+
+            overlay.addEventListener('touchstart', (e) => {
+                fsTouchStartX = e.changedTouches[0].screenX;
+                fsTouchStartY = e.changedTouches[0].screenY;
+            }, { passive: true });
+
+            overlay.addEventListener('touchend', (e) => {
+                if (!fullscreenState.isOpen) return;
+
+                fsTouchEndX = e.changedTouches[0].screenX;
+                fsTouchEndY = e.changedTouches[0].screenY;
+                
+                const diffX = fsTouchEndX - fsTouchStartX;
+                const diffY = fsTouchEndY - fsTouchStartY;
+
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+                    if (diffX < 0) {
+                        navigateFullscreen('next');
+                    } else {
+                        navigateFullscreen('prev');
+                    }
+                }
+            }, { passive: true });
         }
 
         function initImageClickListeners() {
             document.querySelectorAll('.product-image').forEach(img => {
                 img.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    // FIXED: This now correctly gets the currently viewed image's index
                     const src = img.src;
                     const productIndex = parseInt(img.dataset.product);
                     const imageIndex = parseInt(img.dataset.index);
